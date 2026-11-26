@@ -348,6 +348,21 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
   .hero__stats .hero__stat-mark { width: var(--hero-stat-compact-mark-size); height: var(--hero-stat-compact-mark-size); }
 }
 @media (max-width: 768px) {
+  .hero.is-sequenced { min-block-size: 0; }
+  .hero__screen { position: relative; }
+  .hero .hero__chat, .hero .hero__expertise, .hero .hero__waveform, .hero.is-sequenced .hero__scroll-cue {
+    display: none;
+  }
+  .has-motion .hero .hero__frame, .has-motion .hero .hero__frame.is-entering {
+    opacity: 1;
+    scale: 1;
+    animation: none;
+  }
+  .has-motion .hero .hero__portrait, .has-motion .hero .hero__stat-mark,
+  .has-motion .hero .hero__stats div:not(.has-arrived) {
+    opacity: 1;
+    animation: none;
+  }
   .has-motion .hero__title-ai, .has-motion .hero__title-ai.is-impact { width: auto; transition: none; }
   .has-motion .hero__title-ai span, .has-motion .hero__title-ai.is-flying span, .has-motion .hero__title-ai.is-impact span { opacity: 1; translate: 0 0; animation: none; filter: none; }
   .has-motion .hero__title-ai.is-impact + .hero__title-designer { animation: none; }

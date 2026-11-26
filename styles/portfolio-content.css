@@ -40,3 +40,12 @@
 .portfolio-case-details:empty {
   display: none;
 }
+
+[data-portfolio-inline-link] {
+  color: inherit;
+  text-decoration: underline;
+}
+
+figure:has(> [data-portfolio-removed]):not(:has(> :not([data-portfolio-removed]))) {
+  display: none;
+}

@@ -1,7 +1,7 @@
 /* Редакторские правки применяются до запуска анимаций сайта. */
 (() => {
   const script = document.currentScript;
-  const pages = ['index.html', 'eis-sob.html'];
+  const pages = ['index.html', 'eis-sob.html', 'case-2.html', 'case-3.html', 'case-4.html', 'case-5.html'];
   const allowedStyles = new Set([
     'font-family', 'font-size', 'font-weight', 'line-height', 'letter-spacing', 'text-align',
     'color', 'background-color', 'border-color', 'border-width', 'border-style', 'border-radius',
@@ -10,8 +10,14 @@
     'min-width', 'min-height', 'max-height', 'height', 'aspect-ratio', 'object-fit', 'object-position', 'opacity', 'translate',
   ]);
   const skip = 'script, style, link, svg, canvas, noscript, template';
-  const children = element => [...element.children].filter(child => !child.matches(skip + ', .portfolio-added'));
-  const textSlots = element => [...element.childNodes].filter(node => node.nodeType === 3 && node.data.trim());
+  const inlineLink = '[data-portfolio-inline-link]';
+  const children = element => [...element.children].flatMap(child => child.matches(inlineLink) ? children(child) : [child])
+    .filter(child => !child.matches(skip + ', .portfolio-added'));
+  const textSlots = element => [...(element.querySelector(':scope > ' + inlineLink) || element).childNodes]
+    .filter(node => node.nodeType === 3 && node.data.trim());
+  const canLink = node => node.matches('a, button[type="button"]') ||
+    (node.matches('p, span, small, strong, em, li, dt, dd, h1, h2, h3, h4, h5, h6, blockquote') &&
+      !node.closest('a, button, [role="link"]') && !node.querySelector('a, button, input, [role="link"]'));
   const create = (doc, tag, className, text) => {
     const element = doc.createElement(tag);
     if (className) element.className = className;
@@ -20,9 +26,11 @@
   };
 
   function address(element) {
+    if (element.matches(inlineLink)) element = element.parentElement;
     const path = [];
     while (!element.id && element !== element.ownerDocument.body) {
-      const parent = element.parentElement;
+      const owner = element.parentElement;
+      const parent = owner?.matches(inlineLink) ? owner.parentElement : owner;
       if (!parent || element.matches(skip)) return '';
       path.unshift(children(parent).indexOf(element));
       element = parent;
@@ -151,7 +159,6 @@
     for (const name of ['alt', 'aria-label', 'title']) {
       if (typeof attrs[name] === 'string') element.setAttribute(name, attrs[name]);
     }
-    if (element.matches('a') && url(attrs.href, true)) element.setAttribute('href', url(attrs.href, true));
     if (element.matches('img, video, source') && url(attrs.src)) {
       element.setAttribute(element.hasAttribute('data-src') ? 'data-src' : 'src', url(attrs.src));
       element.removeAttribute('srcset');
@@ -159,6 +166,28 @@
     }
     if (element.matches('video') && url(attrs.poster)) element.poster = url(attrs.poster);
     if (url(attrs.background)) element.style.backgroundImage = background(url(attrs.background));
+    if (edit.removed) {
+      element.hidden = true;
+      element.dataset.portfolioRemoved = '';
+      element.style.setProperty('display', 'none', 'important');
+    }
+    const destination = url(attrs.href, true);
+    if (!destination || !canLink(element)) return;
+    if (element.matches('a')) element.setAttribute('href', destination);
+    else if (element.matches('button')) {
+      element.removeAttribute('data-project-open');
+      element.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        element.ownerDocument.defaultView?.location.assign(destination);
+      }, true);
+    } else {
+      const anchor = create(element.ownerDocument, 'a');
+      anchor.setAttribute('data-portfolio-inline-link', '');
+      anchor.href = destination;
+      anchor.append(...element.childNodes);
+      element.append(anchor);
+    }
   }
 
   function bindMedia(element, profiles, preview) {
@@ -282,7 +311,7 @@
     bindVariants(doc, page, content.variants, previewDevice);
   }
 
-  window.PortfolioEditor = { address, apply, children, pages, resolve, textSlots, url };
+  window.PortfolioEditor = { address, apply, canLink, children, pages, resolve, textSlots, url };
   if (script?.hasAttribute('data-apply') && window.PORTFOLIO_CONTENT) {
     const name = location.pathname.split('/').at(-1);
     const page = pages.includes(name) || Object.hasOwn(window.PORTFOLIO_CONTENT.cases || {}, name) ? name : pages[0];

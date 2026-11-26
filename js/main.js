@@ -1,7 +1,7 @@
 /* Запуск. Режимы: ?static – без анимаций, всё видно (для скриншотов); &to=<id> – показать секцию (headless не рисует прокрутку,
    поэтому страница сдвигается отрицательным margin); prefers-reduced-motion – как static, но Lenis тоже выключен.
    Движение – js/motion.js (описание приёмов в docs/motion.md), 3D – js/scene.js лениво (docs/scene.md). */
-import { initMotion, initStatCount, initIntroTyping, initRecommendations } from './motion.js?v=5';
+import { initMotion, initStatCount, initIntroTyping, initRecommendations } from './motion.js?v=6';
 import { initDotCursor } from './cursor.js';
 
 const params = new URLSearchParams(location.search);
@@ -165,7 +165,7 @@ document.querySelectorAll('.project-dialog').forEach(dialog => {
   dialog.querySelector('.project-dialog__close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
 });
-if (motionOn) {
+if (motionOn && !window.matchMedia('(max-width: 768px)').matches) {
   initStatCount();
   initIntroTyping();
 }
@@ -220,7 +220,7 @@ const showSection = () => {
 
 const restoreProjectCard = () => {
   const id = location.hash.slice(1);
-  if (id !== 'eis-project' && !id.startsWith('portfolio-')) return;
+  if (id !== 'eis-project' && !id.startsWith('portfolio-') && !/^case-card-[2-5]$/.test(id)) return;
   const card = document.getElementById(id);
   if (!card?.matches('.showcase__card')) return;
   const scrollToCard = () => requestAnimationFrame(() => {

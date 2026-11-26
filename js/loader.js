@@ -1,6 +1,7 @@
 (() => {
   if (new URLSearchParams(location.search).has('static') ||
-      location.hash === '#eis-project' ||
+      /^#(?:eis-project|case-card-[2-5]|portfolio-)/.test(location.hash) ||
+      matchMedia('(max-width: 768px)').matches ||
       matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const loader = document.querySelector('#loader-layout').content.firstElementChild.cloneNode(true);

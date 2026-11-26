@@ -219,9 +219,9 @@ const frameSequence = (screen) => {
   const sideBlocks = screen.querySelectorAll('.hero__intro, .hero__stats');
   const stats = screen.querySelector('.hero__stats');
   const chat = screen.querySelector('.hero__chat');
-  const title = screen.querySelector('.hero__title');
   const loaded = new Set([1]);
   const originalSource = image.dataset.portfolioFrameSource || image.src;
+  const mobile = window.matchMedia('(max-width: 768px)');
   const fixedImage = image.hasAttribute('data-portfolio-still') && !image.dataset.portfolioFrameSource;
   const queue = new Set(fixedImage ? [] : Array.from({ length: total - 1 }, (_, i) => i + 2));
   let target = 1;
@@ -231,7 +231,7 @@ const frameSequence = (screen) => {
 
   const frameURL = number => new URL(`${number}.jpg`, originalSource).href;
   const draw = () => {
-    if (image.hasAttribute('data-portfolio-still') || !loaded.has(target)) return;
+    if (mobile.matches || image.hasAttribute('data-portfolio-still') || !loaded.has(target)) return;
     const source = frameURL(target);
     if (target === rendered && image.src === source) return;
     image.src = source;
@@ -239,7 +239,7 @@ const frameSequence = (screen) => {
   };
 
   const loadFrames = () => {
-    if (image.hasAttribute('data-portfolio-still')) return;
+    if (mobile.matches || image.hasAttribute('data-portfolio-still')) return;
     while (inFlight < 4 && queue.size) {
       const number = queue.has(target) ? target : queue.values().next().value;
       queue.delete(number);
@@ -261,6 +261,7 @@ const frameSequence = (screen) => {
 
   const update = () => {
     updatePending = false;
+    if (mobile.matches) return;
     const offset = Math.max(0, -section.getBoundingClientRect().top);
     screen.classList.toggle('has-scrolled', offset > 0);
     screen.style.setProperty('--hero-opacity', Math.max(0, 1 - offset / fadeDistance));
@@ -276,8 +277,8 @@ const frameSequence = (screen) => {
     loadFrames();
   };
 
-  section.classList.add('is-sequenced');
   const measureBlocks = () => {
+    if (mobile.matches) return;
     for (const block of sideBlocks) {
       const center = block.offsetTop + block.offsetHeight / 2;
       block.style.setProperty('--hero-side-shift', `${-center}px`);
@@ -286,13 +287,8 @@ const frameSequence = (screen) => {
       const right = screen.getBoundingClientRect().right - stats.getBoundingClientRect().right;
       chat.style.setProperty('--hero-chat-width', `${stats.offsetWidth}px`);
       chat.style.setProperty('--hero-chat-right', `${Math.max(0, right)}px`);
-      if (window.matchMedia('(max-width: 768px)').matches) {
-        const gap = parseFloat(css('--space-16')) || 0;
-        chat.style.setProperty('--hero-chat-top', `${title.offsetTop + title.offsetHeight + gap}px`);
-      } else {
-        const gap = parseFloat(css('--hero-chat-stats-gap')) || 0;
-        chat.style.setProperty('--hero-chat-top', `${Math.max(0, stats.offsetTop - chat.offsetHeight - gap)}px`);
-      }
+      const gap = parseFloat(css('--hero-chat-stats-gap')) || 0;
+      chat.style.setProperty('--hero-chat-top', `${Math.max(0, stats.offsetTop - chat.offsetHeight - gap)}px`);
     }
     update();
   };
@@ -302,11 +298,21 @@ const frameSequence = (screen) => {
   window.addEventListener('resize', measureBlocks);
   ready(screen);
   window.addEventListener('scroll', () => {
-    if (updatePending) return;
+    if (mobile.matches || updatePending) return;
     updatePending = true;
     requestAnimationFrame(update);
   }, { passive: true });
-  measureBlocks();
+  const switchMode = () => {
+    section.classList.toggle('is-sequenced', !mobile.matches);
+    if (mobile.matches) {
+      screen.classList.remove('has-scrolled', 'has-expertise');
+      if (!image.hasAttribute('data-portfolio-still')) image.src = originalSource;
+      return;
+    }
+    measureBlocks();
+  };
+  mobile.addEventListener('change', switchMode);
+  switchMode();
 };
 
 const frameApproach = (image) => {
@@ -780,10 +786,16 @@ export const initStatCount = () => {
 
 export const initMotion = (hasGsap, lenis) => {
   if (hasGsap) gsap.config({ nullTargetWarn: false });
+  const mobile = window.matchMedia('(max-width: 768px)').matches;
   document.querySelectorAll('[data-reveal]').forEach(el => {
     const name = el.dataset.reveal;
     const fn = PRESETS[name];
     if (!fn) { console.warn(`motion: приёма "${name}" нет в реестре (docs/motion.md)`); ready(el); return; }
+    if (mobile && el.closest('#hero') && fn !== frameSequence) {
+      if (fn === frameApproach) el.classList.add('has-arrived');
+      ready(el);
+      return;
+    }
     if (hasGsap || name === 'contacts-marks' || fn === showcaseFlight || fn === careerTimeline || fn === brandHover || fn === brandScroll || fn === frameSequence || fn === frameApproach || fn === waveformArrive || fn === chatLoop || fn === clientsMarquee || fn === experienceHover || fn === expertiseType || fn === expertiseCards || fn === frameExpertise) fn(el, lenis);
     else ready(el);
   });
