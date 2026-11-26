@@ -86,6 +86,35 @@ window.PORTFOLIO_CONTENT = {
             "style": {
               "font-size": "60px"
             }
+          },
+          "[\"eis-project\",0,1]": {
+            "style": {
+              "font-size": "24px",
+              "line-height": "1",
+              "translate": "0px -10px"
+            }
+          },
+          "[\"eis-project\",0,2]": {
+            "style": {
+              "font-size": "14px",
+              "line-height": "1.3",
+              "translate": "0px -20px"
+            }
+          },
+          "[\"eis-project\",0,0]": {
+            "style": {
+              "translate": "-3px 1px"
+            }
+          },
+          "[\"eis-project\"]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"eis-project\",1,0]": {
+            "style": {
+              "border-radius": "8px"
+            }
           }
         }
       },
