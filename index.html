@@ -6,7 +6,13 @@
   <title>Senior Product Designer | Портфолио</title>
   <meta name="description" content="Портфолио Senior Product Designer">
   <script>
+    const root = document.documentElement;
+    root.dataset.siteBoot = 'pending';
+    window.addEventListener('load', () => {
+      if (root.dataset.siteBoot === 'pending') delete root.dataset.siteBoot;
+    }, { once: true });
     if (performance.getEntriesByType('navigation')[0]?.type === 'reload') {
+      root.dataset.siteLanding = 'top';
       const previousRestoration = history.scrollRestoration;
       history.scrollRestoration = 'manual';
       if (location.hash) history.replaceState(history.state, '', location.pathname + location.search);
@@ -14,6 +20,9 @@
         window.scrollTo(0, 0);
         requestAnimationFrame(() => { history.scrollRestoration = previousRestoration; });
       }, { once: true });
+    } else if (/^#(?:projects-intro|eis-project|case-card-[2-5])$/.test(location.hash)) {
+      root.dataset.siteLanding = 'projects';
+      history.replaceState(history.state, '', location.pathname + location.search);
     }
   </script>
   <link rel="preload" as="image" href="https://raw.githubusercontent.com/aipopovuxui-cpu/ui/06da657cb4cadb976e70baa6924a7b380da10fae/1.jpg">
@@ -24,10 +33,10 @@
 
   <!-- Стили: порядок важен – токены → база → компоненты → секции. Перед выкладкой поднять ?v=N -->
   <link rel="stylesheet" href="styles/tokens.css?v=3">
-  <link rel="stylesheet" href="styles/base.css?v=3">
+  <link rel="stylesheet" href="styles/base.css?v=7">
   <link rel="stylesheet" href="styles/components.css?v=3">
-  <link rel="stylesheet" href="styles/sections.css?v=6">
-  <link rel="stylesheet" href="styles/portfolio-content.css?v=6">
+  <link rel="stylesheet" href="styles/sections.css?v=7">
+  <link rel="stylesheet" href="styles/portfolio-content.css?v=7">
 
   <!-- 3D: Three.js через importmap, грузится лениво из js/scene.js только если на странице есть [data-scene] -->
   <script type="importmap">
@@ -58,7 +67,7 @@
       </div>
     </div>
   </template>
-  <script src="js/loader.js?v=6"></script>
+  <script src="js/loader.js?v=7"></script>
   <div class="scroll-progress" role="progressbar" aria-label="Прогресс прокрутки" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
   <header class="site-header">
     <a href="#hero" aria-label="На первый экран" data-reveal="brand-scroll">
@@ -569,6 +578,6 @@
 
   <script src="data/portfolio-content.js?v=33ea021870f3"></script>
   <script src="js/portfolio-content.js?v=6" data-apply></script>
-  <script type="module" src="js/main.js?v=6"></script>
+  <script type="module" src="js/main.js?v=7"></script>
 </body>
 </html>

@@ -218,31 +218,29 @@ const showSection = () => {
   if (el) document.body.style.marginTop = `-${el.offsetTop}px`;
 };
 
-const restoreProjectCard = () => {
-  const id = location.hash.slice(1);
-  if (id !== 'eis-project' && !id.startsWith('portfolio-') && !/^case-card-[2-5]$/.test(id)) return;
-  const card = document.getElementById(id);
-  if (!card?.matches('.showcase__card')) return;
-  const scrollToCard = () => requestAnimationFrame(() => {
-    const lead = card.closest('.showcase__lead');
-    if (!lead) {
-      card.scrollIntoView({ block: 'center', behavior: 'instant' });
-      return;
-    }
-    const runway = lead.parentElement;
-    const travel = runway.offsetHeight - lead.offsetHeight;
-    const top = parseFloat(getComputedStyle(card).getPropertyValue('--showcase-return-card-top'));
-    window.scrollTo(0, runway.getBoundingClientRect().top + window.scrollY + travel + card.offsetTop - top);
-  });
-  if (document.readyState === 'complete') scrollToCard();
-  else window.addEventListener('load', scrollToCard, { once: true });
+const placePage = (top, lenis) => {
+  if (lenis) lenis.scrollTo(top, { immediate: true, force: true });
+  else window.scrollTo({ top, behavior: 'instant' });
 };
 
-document.fonts.ready.then(() => {
+const landOnProjectsIntro = async lenis => {
+  const intro = document.getElementById('projects-intro');
+  if (!motionOn) intro.closest('.showcase').classList.add('is-intro-landing');
+  const position = () => placePage(Math.ceil(intro.getBoundingClientRect().top + window.scrollY), lenis);
+  position();
+  await new Promise(resolve => requestAnimationFrame(resolve));
+  position();
+  history.replaceState(history.state, '', '#projects-intro');
+};
+
+const root = document.documentElement;
+root.dataset.siteBoot = 'preparing';
+document.fonts.ready.then(async () => {
+  let lenis;
   if (motionOn) {
     document.documentElement.classList.add('has-motion');
     if (hasGsap) gsap.registerPlugin(ScrollTrigger, SplitText);
-    const lenis = smoothScroll();
+    lenis = smoothScroll();
     initMotion(hasGsap, lenis);
   } else {
     document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-ready'));
@@ -251,7 +249,8 @@ document.fonts.ready.then(() => {
   lazyVideo();
   lazyScene();
   if (isStatic) showSection();
-  restoreProjectCard();
+  if (root.dataset.siteLanding === 'projects') await landOnProjectsIntro(lenis);
+  else if (root.dataset.siteLanding === 'top') placePage(0, lenis);
   updateHeaderTheme();
   updateScrollProgress();
-});
+}).finally(() => { delete root.dataset.siteBoot; });

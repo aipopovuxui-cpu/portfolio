@@ -1053,6 +1053,8 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
   background: var(--color-bg-page);
 }
 .showcase__heading { block-size: calc(var(--showcase-heading-height) + var(--showcase-heading-gap)); }
+.showcase.is-intro-landing .showcase__lead { padding-block-start: 0; }
+.showcase.is-intro-landing .showcase__heading { block-size: 100svh; }
 .showcase__title, .showcase__mark {
   position: absolute;
   margin: 0;
@@ -1073,20 +1075,20 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
 .showcase__mark img { position: absolute; inset: 0; inline-size: 100%; }
 .showcase__mark-large { opacity: 0; }
 .showcase.is-animated .showcase__mark img { animation: showcase-spin var(--showcase-spin) linear infinite; }
-.showcase.is-animated .showcase__title, .showcase.is-animated .showcase__mark {
+.showcase:is(.is-animated, .is-intro-landing) :is(.showcase__title, .showcase__mark) {
   translate: calc(-50% * (1 - var(--showcase-flight))) calc(-50% * (1 - var(--showcase-flight)));
 }
-.showcase.is-animated .showcase__title {
+.showcase:is(.is-animated, .is-intro-landing) .showcase__title {
   inset-inline-start: calc(50% + (var(--showcase-inset) - 50%) * var(--showcase-flight));
   inset-block-start: calc(50svh + (var(--showcase-heading-top) - 50svh) * var(--showcase-flight));
 }
-.showcase.is-animated .showcase__mark {
+.showcase:is(.is-animated, .is-intro-landing) .showcase__mark {
   inset-inline-start: calc(50% + (50% - var(--section-inset-end) - var(--showcase-mark-small)) * var(--showcase-flight));
   inset-block-start: calc(var(--showcase-mark-center) + (var(--showcase-heading-top) + var(--space-4) - var(--showcase-mark-center)) * var(--showcase-flight));
   inline-size: calc(var(--showcase-mark-large) + (var(--showcase-mark-small) - var(--showcase-mark-large)) * var(--showcase-flight));
 }
-.showcase.is-animated .showcase__mark-large { opacity: calc(1 - var(--showcase-flight)); }
-.showcase.is-animated .showcase__mark-small { opacity: var(--showcase-flight); }
+.showcase:is(.is-animated, .is-intro-landing) .showcase__mark-large { opacity: calc(1 - var(--showcase-flight)); }
+.showcase:is(.is-animated, .is-intro-landing) .showcase__mark-small { opacity: var(--showcase-flight); }
 @keyframes showcase-spin { to { rotate: 1turn; } }
 .showcase__list {
   display: grid;

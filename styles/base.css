@@ -86,7 +86,7 @@ p, li { text-wrap: pretty; }
 .contacts__name { font: var(--contacts-name-type); letter-spacing: normal; }
 .contacts__details { font: var(--contacts-details-type); letter-spacing: normal; }
 .showcase__title { font: var(--showcase-heading-type); letter-spacing: var(--showcase-heading-tracking); }
-.showcase.is-animated .showcase__title {
+.showcase:is(.is-animated, .is-intro-landing) .showcase__title {
   font-size: calc(var(--showcase-hero-size) + (var(--showcase-heading-size) - var(--showcase-hero-size)) * var(--showcase-flight));
 }
 .showcase__case-title { font: var(--showcase-case-type); letter-spacing: var(--showcase-heading-tracking); }

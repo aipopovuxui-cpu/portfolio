@@ -1,5 +1,6 @@
 (() => {
   if (new URLSearchParams(location.search).has('static') ||
+      document.documentElement.dataset.siteLanding === 'projects' ||
       /^#(?:eis-project|case-card-[2-5]|portfolio-)/.test(location.hash) ||
       matchMedia('(max-width: 768px)').matches ||
       matchMedia('(prefers-reduced-motion: reduce)').matches) return;

@@ -1,3 +1,8 @@
+[data-site-boot] :is(main, .site-header, .scroll-progress, .site-menu) {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .portfolio-added:is(img, video) {
   display: block;
   max-inline-size: 100%;
