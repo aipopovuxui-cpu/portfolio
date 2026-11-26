@@ -158,7 +158,13 @@ window.PORTFOLIO_CONTENT = {
           },
           "[\"\",3,0,1]": {
             "style": {
-              "translate": "10px 0px"
+              "translate": "20px 0px"
+            }
+          },
+          "[\"portfolio-bc75ea72-80b1-4803-af4d-4bc480e2282c\"]": {
+            "style": {
+              "line-height": "1.2",
+              "font-family": "Onest"
             }
           }
         }
