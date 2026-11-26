@@ -135,6 +135,10 @@ const expertiseCards = el => {
 
 export const initRecommendations = autoplay => {
   const panel = document.querySelector('.proof__panel');
+  if (!panel || !window.PortfolioEditor) return;
+  const { readRecommendation, showRecommendation } = window.PortfolioEditor;
+  const reference = readRecommendation(panel);
+  const slides = window.PORTFOLIO_CONTENT?.recommendations;
   const indicators = [...panel.querySelectorAll('.proof__indicator')];
   const progress = panel.querySelector('.proof__progress');
   const visiblePortion = .35;
@@ -145,12 +149,12 @@ export const initRecommendations = autoplay => {
   let inView = false;
 
   const select = index => {
-    indicators[current].setAttribute('aria-pressed', 'false');
-    indicators[index].setAttribute('aria-pressed', 'true');
+    showRecommendation(panel, reference, slides, index);
     current = index;
     progress.value = elapsed = 0;
     previous = 0;
   };
+  select(0);
   indicators.forEach((button, index) => button.addEventListener('click', () => select(index)));
   if (!autoplay) return;
 

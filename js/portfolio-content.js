@@ -11,7 +11,9 @@
   ]);
   const skip = 'script, style, link, svg, canvas, noscript, template';
   const inlineLink = '[data-portfolio-inline-link]';
-  const children = element => [...element.children].flatMap(child => child.matches(inlineLink) ? children(child) : [child])
+  const copyRow = '[data-portfolio-copy-row]';
+  const transparent = inlineLink + ', ' + copyRow;
+  const children = element => [...element.children].flatMap(child => child.matches(transparent) ? children(child) : [child])
     .filter(child => !child.matches(skip + ', .portfolio-added'));
   const textSlots = element => [...(element.querySelector(':scope > ' + inlineLink) || element).childNodes]
     .filter(node => node.nodeType === 3 && node.data.trim());
@@ -29,8 +31,8 @@
     if (element.matches(inlineLink)) element = element.parentElement;
     const path = [];
     while (!element.id && element !== element.ownerDocument.body) {
-      const owner = element.parentElement;
-      const parent = owner?.matches(inlineLink) ? owner.parentElement : owner;
+      let parent = element.parentElement;
+      while (parent?.matches(transparent)) parent = parent.parentElement;
       if (!parent || element.matches(skip)) return '';
       path.unshift(children(parent).indexOf(element));
       element = parent;
@@ -88,6 +90,10 @@
     const mediaType = block.video ? 'video' : 'img';
     let element;
     switch (type) {
+      case 'copy':
+        element = readCopy(doc, block.html);
+        if (element) element.classList.add('portfolio-copy');
+        break;
       case 'project': {
         element = create(doc, 'article', 'showcase__card');
         const copy = create(doc, 'div', 'showcase__copy');
@@ -142,6 +148,66 @@
     element.id = id;
     element.classList.add('portfolio-added');
     return element;
+  }
+
+  function readCopy(doc, html) {
+    if (typeof html !== 'string') return null;
+    const template = doc.createElement('template');
+    template.innerHTML = html;
+    template.content.querySelectorAll('script, style, template, iframe, frame, object, embed, base, link, meta, foreignObject, animate, set').forEach(node => node.remove());
+    const root = template.content.firstElementChild;
+    if (!root) return null;
+    for (const node of [root, ...root.querySelectorAll('*')]) {
+      for (const attribute of [...node.attributes]) {
+        const name = attribute.name.toLowerCase();
+        if (/^on|^data-editor/.test(name) || /^(?:id|name|autofocus|srcdoc|action|formaction|ping|srcset|data-reveal|data-portfolio-copy-row|data-portfolio-original)$/.test(name)) {
+          node.removeAttributeNode(attribute);
+        } else if (/^(?:href|xlink:href|src|data-src|poster)$/.test(name) && !url(attribute.value, name.endsWith('href'))) {
+          node.removeAttributeNode(attribute);
+        }
+      }
+      if (node.style) {
+        const properties = [...node.style];
+        for (const property of properties) {
+          if (!validStyle(property, node.style.getPropertyValue(property))) node.style.removeProperty(property);
+        }
+      }
+      node.classList.remove('portfolio-added', 'portfolio-copy');
+    }
+    return root;
+  }
+
+  function attachCopy(doc, anchor, element, layout = {}) {
+    let row = anchor.parentElement;
+    if (!row?.matches(copyRow)) {
+      row = doc.createElement('span');
+      row.dataset.portfolioCopyRow = '';
+      anchor.before(row);
+      row.append(anchor);
+      anchor.dataset.portfolioOriginal = '';
+      for (const property of ['grid-row-start', 'grid-row-end', 'grid-column-start', 'grid-column-end', 'align-self', 'justify-self', 'order',
+        'position', 'top', 'right', 'bottom', 'left']) {
+        const value = layout[property];
+        if (typeof value === 'string' && !/[;{}<>]/.test(value)) row.style.setProperty(property, value);
+      }
+    }
+    anchor.after(element);
+  }
+
+  const recommendationFields = { quote: '.proof__quote p', author: '.proof__author', role: '.proof__job' };
+  function readRecommendation(panel) {
+    return Object.fromEntries(Object.entries(recommendationFields).map(([name, selector]) =>
+      [name, panel?.querySelector(selector)?.textContent.trim() || '']));
+  }
+
+  function showRecommendation(panel, reference, slides, index) {
+    const current = { ...reference, ...slides?.[index] };
+    for (const [name, selector] of Object.entries(recommendationFields)) {
+      const element = panel.querySelector(selector);
+      if (element && element.textContent !== current[name]) element.textContent = current[name];
+    }
+    panel.querySelectorAll('.proof__indicator').forEach((indicator, item) =>
+      indicator.setAttribute('aria-pressed', String(index === item)));
   }
 
   function applyEdit(element, edit) {
@@ -291,7 +357,11 @@
       if (!anchor) return;
       const element = createBlock(doc, block);
       if (!element) return;
-      if (block.position === 'before') {
+      if (block.type === 'copy') {
+        const previous = afterTail.get(anchor) || anchor;
+        attachCopy(doc, previous, element, block.layout);
+        afterTail.set(anchor, element);
+      } else if (block.position === 'before') {
         anchor.before(element);
       } else if (block.position === 'after') {
         (afterTail.get(anchor) || anchor).after(element);
@@ -311,7 +381,7 @@
     bindVariants(doc, page, content.variants, previewDevice);
   }
 
-  window.PortfolioEditor = { address, apply, canLink, children, pages, resolve, textSlots, url };
+  window.PortfolioEditor = { address, apply, canLink, children, pages, readRecommendation, resolve, showRecommendation, textSlots, url };
   if (script?.hasAttribute('data-apply') && window.PORTFOLIO_CONTENT) {
     const name = location.pathname.split('/').at(-1);
     const page = pages.includes(name) || Object.hasOwn(window.PORTFOLIO_CONTENT.cases || {}, name) ? name : pages[0];

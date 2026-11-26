@@ -51,6 +51,20 @@
   text-decoration: underline;
 }
 
+[data-portfolio-copy-row] {
+  display: flex;
+  align-items: flex-start;
+  min-inline-size: 0;
+  gap: 0;
+}
+
+[data-portfolio-copy-row] > :is([data-portfolio-original], .portfolio-copy) {
+  position: relative;
+  inset: auto;
+  min-inline-size: 0;
+  margin-inline: 0;
+}
+
 figure:has(> [data-portfolio-removed]):not(:has(> :not([data-portfolio-removed]))) {
   display: none;
 }
