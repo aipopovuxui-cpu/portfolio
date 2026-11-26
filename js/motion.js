@@ -221,7 +221,7 @@ const frameSequence = (screen) => {
   const chat = screen.querySelector('.hero__chat');
   const title = screen.querySelector('.hero__title');
   const loaded = new Set([1]);
-  const queue = new Set(Array.from({ length: total - 1 }, (_, i) => i + 2));
+  const queue = new Set(image.hasAttribute('data-portfolio-still') ? [] : Array.from({ length: total - 1 }, (_, i) => i + 2));
   let target = 1;
   let rendered = 1;
   let inFlight = 0;
