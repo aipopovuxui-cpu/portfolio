@@ -3,6 +3,12 @@
   pointer-events: none;
 }
 
+@media (hover: hover) {
+  html:not([data-editor-page]) img {
+    pointer-events: none;
+  }
+}
+
 .portfolio-added:is(img, video) {
   display: block;
   max-inline-size: 100%;
