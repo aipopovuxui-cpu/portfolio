@@ -8,7 +8,29 @@ window.PORTFOLIO_CONTENT = {
       }
     }
   },
-  "blocks": [],
+  "blocks": [
+    {
+      "id": "portfolio-41d2fe75-bdcb-47b6-ab56-956194526b56",
+      "page": "eis-sob.html",
+      "type": "img",
+      "anchor": "[\"\",3,0,1]",
+      "position": "end",
+      "src": "assets/uploads/d14124fac40fc7f3ab26d6981d44ad827846560c529323853ac632682a40203b.jpg",
+      "alt": "",
+      "video": false,
+      "metrics": []
+    },
+    {
+      "id": "portfolio-bc75ea72-80b1-4803-af4d-4bc480e2282c",
+      "page": "eis-sob.html",
+      "type": "text",
+      "anchor": "[\"\",3,0,1]",
+      "position": "end",
+      "text": "- Содержимое — можно назначить ссылку кнопке или тексту и удалить выбранный элемент. Удалённый элемент можно восстановить из списка.\n- Медиа — можно заменить изображение или видео для выбранной версии сайта.\n- Отменить — возвращает до 10 последних действий за сеанс. Работает и Ctrl+Z.\nНа мобильном первый экран теперь статичный, с первым кадром и без звуковой волны. Остальные разделы доступны обычной прокруткой.",
+      "video": false,
+      "metrics": []
+    }
+  ],
   "tokens": {},
   "variants": {
     "mobile": {
@@ -100,6 +122,19 @@ window.PORTFOLIO_CONTENT = {
           "[\"patent-popup\",0]": {
             "style": {
               "translate": "0px -10px"
+            }
+          }
+        },
+        "eis-sob.html": {
+          "[\"portfolio-41d2fe75-bdcb-47b6-ab56-956194526b56\"]": {
+            "style": {
+              "border-radius": "20px"
+            }
+          },
+          "[\"\",3,0,0,0]": {
+            "style": {
+              "font-size": "18px",
+              "gap": "8px"
             }
           }
         }
