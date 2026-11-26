@@ -25,3 +25,18 @@
   block-size: 100%;
   object-fit: contain;
 }
+
+.portfolio-case-video video {
+  display: block;
+  inline-size: 100%;
+  border-radius: var(--skills-card-radius);
+}
+
+.portfolio-case-details {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.portfolio-case-details:empty {
+  display: none;
+}

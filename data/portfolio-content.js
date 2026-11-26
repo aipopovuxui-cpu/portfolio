@@ -26,6 +26,43 @@ window.PORTFOLIO_CONTENT = {
           "font-size": "12px",
           "font-family": "Onest"
         }
+      },
+      "[\"hero-title\",2,1]": {
+        "style": {
+          "font-size": "60px"
+        }
+      },
+      "[\"hero-title\",1]": {
+        "style": {
+          "font-size": "60px"
+        }
+      },
+      "[\"hero-title\",0]": {
+        "style": {
+          "font-size": "60px"
+        }
+      },
+      "[\"hero-title\",2,0,0]": {
+        "style": {
+          "font-size": "60px"
+        }
+      },
+      "[\"hero\",0,1,1,2]": {
+        "style": {
+          "font-size": "12px",
+          "translate": "0px -20px"
+        }
+      },
+      "[\"hero\",0,1,1,1]": {
+        "style": {
+          "width": "100px",
+          "translate": "0px -22px"
+        }
+      },
+      "[\"hero\",0,1,1,0]": {
+        "style": {
+          "translate": "0px -20px"
+        }
       }
     },
     "eis-sob.html": {

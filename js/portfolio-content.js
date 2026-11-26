@@ -7,7 +7,7 @@
     'color', 'background-color', 'border-color', 'border-width', 'border-style', 'border-radius',
     'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
     'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'gap', 'width', 'max-width',
-    'min-height', 'height', 'object-fit', 'opacity',
+    'min-height', 'height', 'object-fit', 'opacity', 'translate',
   ]);
   const skip = 'script, style, link, svg, canvas, noscript, template';
   const children = element => [...element.children].filter(child => !child.matches(skip + ', .portfolio-added'));
@@ -190,7 +190,8 @@
 
   window.PortfolioEditor = { address, apply, children, pages, resolve, textSlots, url };
   if (script?.hasAttribute('data-apply') && window.PORTFOLIO_CONTENT) {
-    const page = pages.find(name => location.pathname.endsWith('/' + name)) || pages[0];
+    const name = location.pathname.split('/').at(-1);
+    const page = pages.includes(name) || Object.hasOwn(window.PORTFOLIO_CONTENT.cases || {}, name) ? name : pages[0];
     apply(document, page, window.PORTFOLIO_CONTENT);
   }
 })();

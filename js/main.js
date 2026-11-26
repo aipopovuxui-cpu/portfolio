@@ -218,11 +218,17 @@ const showSection = () => {
   if (el) document.body.style.marginTop = `-${el.offsetTop}px`;
 };
 
-const restoreEisCard = () => {
-  if (location.hash !== '#eis-project') return;
+const restoreProjectCard = () => {
+  const id = location.hash.slice(1);
+  if (id !== 'eis-project' && !id.startsWith('portfolio-')) return;
+  const card = document.getElementById(id);
+  if (!card?.matches('.showcase__card')) return;
   const scrollToCard = () => requestAnimationFrame(() => {
-    const card = document.getElementById('eis-project');
     const lead = card.closest('.showcase__lead');
+    if (!lead) {
+      card.scrollIntoView({ block: 'center', behavior: 'instant' });
+      return;
+    }
     const runway = lead.parentElement;
     const travel = runway.offsetHeight - lead.offsetHeight;
     const top = parseFloat(getComputedStyle(card).getPropertyValue('--showcase-return-card-top'));
@@ -245,7 +251,7 @@ document.fonts.ready.then(() => {
   lazyVideo();
   lazyScene();
   if (isStatic) showSection();
-  restoreEisCard();
+  restoreProjectCard();
   updateHeaderTheme();
   updateScrollProgress();
 });
