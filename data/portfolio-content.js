@@ -96,6 +96,11 @@ window.PORTFOLIO_CONTENT = {
             "style": {
               "translate": "0px -20px"
             }
+          },
+          "[\"patent-popup\",0]": {
+            "style": {
+              "translate": "0px -10px"
+            }
           }
         }
       },
