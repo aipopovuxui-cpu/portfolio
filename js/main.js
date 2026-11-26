@@ -1,7 +1,7 @@
 /* Запуск. Режимы: ?static – без анимаций, всё видно (для скриншотов); &to=<id> – показать секцию (headless не рисует прокрутку,
    поэтому страница сдвигается отрицательным margin); prefers-reduced-motion – как static, но Lenis тоже выключен.
    Движение – js/motion.js (описание приёмов в docs/motion.md), 3D – js/scene.js лениво (docs/scene.md). */
-import { initMotion, initStatCount, initIntroTyping, initRecommendations } from './motion.js?v=3';
+import { initMotion, initStatCount, initIntroTyping, initRecommendations } from './motion.js?v=5';
 import { initDotCursor } from './cursor.js';
 
 const params = new URLSearchParams(location.search);

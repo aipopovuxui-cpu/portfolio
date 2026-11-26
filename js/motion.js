@@ -221,20 +221,25 @@ const frameSequence = (screen) => {
   const chat = screen.querySelector('.hero__chat');
   const title = screen.querySelector('.hero__title');
   const loaded = new Set([1]);
-  const queue = new Set(image.hasAttribute('data-portfolio-still') ? [] : Array.from({ length: total - 1 }, (_, i) => i + 2));
+  const originalSource = image.dataset.portfolioFrameSource || image.src;
+  const fixedImage = image.hasAttribute('data-portfolio-still') && !image.dataset.portfolioFrameSource;
+  const queue = new Set(fixedImage ? [] : Array.from({ length: total - 1 }, (_, i) => i + 2));
   let target = 1;
   let rendered = 1;
   let inFlight = 0;
   let updatePending = false;
 
-  const frameURL = number => new URL(`${number}.jpg`, image.src).href;
+  const frameURL = number => new URL(`${number}.jpg`, originalSource).href;
   const draw = () => {
-    if (target === rendered || !loaded.has(target)) return;
-    image.src = frameURL(target);
+    if (image.hasAttribute('data-portfolio-still') || !loaded.has(target)) return;
+    const source = frameURL(target);
+    if (target === rendered && image.src === source) return;
+    image.src = source;
     rendered = target;
   };
 
   const loadFrames = () => {
+    if (image.hasAttribute('data-portfolio-still')) return;
     while (inFlight < 4 && queue.size) {
       const number = queue.has(target) ? target : queue.values().next().value;
       queue.delete(number);
