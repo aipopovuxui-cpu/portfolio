@@ -104,31 +104,6 @@ window.PORTFOLIO_CONTENT = {
               "translate": "-20px 0px"
             }
           },
-          "[\"hero\",0,1,2,1]": {
-            "style": {
-              "translate": "10px 10px"
-            }
-          },
-          "[\"hero\",0,1,2,0]": {
-            "style": {
-              "translate": "0px 20px"
-            }
-          },
-          "[\"hero\",0,1,2,2]": {
-            "style": {
-              "translate": "0px 10px"
-            }
-          },
-          "[\"hero\",0,1,2,4]": {
-            "style": {
-              "translate": "10px 0px"
-            }
-          },
-          "[\"hero\",0,1,2,3]": {
-            "style": {
-              "translate": "20px 0px"
-            }
-          },
           "[\"patent-popup\",0,1,2]": {
             "style": {
               "translate": "0px -20px"
