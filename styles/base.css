@@ -1,0 +1,124 @@
+/* База: reset, документ, сетка, шкала текста, состояния движения. Сырых значений здесь нет – только токены. */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+body {
+  min-height: 100dvh;
+  background: var(--color-bg-page);
+  color: var(--color-fg);
+  font-family: var(--font-text);
+  font-size: var(--fs-body-m);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+img, video, canvas, svg { display: block; max-width: 100%; }
+img, video { height: auto; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; padding: 0; }
+p, h1, h2, h3, h4 { overflow-wrap: break-word; }
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
+/* Сетка: контейнер с полями и 12 колонок. Ширина элементов – через grid-column, не через px */
+.wrapper {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--page-margin);
+}
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+.section {
+  padding-block: var(--space-section);
+}
+.section--dark {
+  background: var(--color-bg-dark);
+  color: var(--color-fg-on-dark);
+}
+.section--sheet {
+  background: var(--color-bg-sheet);
+}
+
+/* Шкала текста. Размер текста в правилах секций не ставится – только эти классы */
+.display-xl { font-family: var(--font-display); font-size: var(--fs-display-xl); line-height: var(--lh-display); letter-spacing: var(--ls-display); font-weight: 500; }
+.display-l  { font-family: var(--font-display); font-size: var(--fs-display-l);  line-height: var(--lh-display); letter-spacing: var(--ls-display); font-weight: 500; }
+.display-s  { font-family: var(--font-display); font-size: var(--fs-display-s);  line-height: var(--lh-display); letter-spacing: var(--ls-display); font-weight: 500; }
+.title-m    { font-family: var(--font-display); font-size: var(--fs-title-m);    line-height: var(--lh-title); font-weight: 500; }
+.title-xxs  { font-family: var(--font-text);    font-size: var(--fs-title-xxs);  line-height: var(--lh-title); font-weight: 500; }
+.body-l     { font-size: var(--fs-body-l); }
+.hero-display { font: var(--hero-display); }
+.hero-senior { font-size: var(--fs-hero-senior); }
+.hero-bio { font: var(--hero-bio-type); letter-spacing: var(--hero-bio-tracking); }
+.experience { font: var(--experience-text); }
+.experience-title { font: var(--experience-title); }
+.experience-note { font-size: var(--experience-note-size); line-height: var(--experience-note-leading); color: var(--experience-muted); }
+.projects-heading { font: var(--projects-heading); }
+.project-title { font: var(--projects-title); }
+.project-meta { font: var(--projects-meta); }
+.project-description { font: var(--projects-description); }
+.project-button { font: var(--projects-button); }
+.tools__title { font: var(--career-heading); letter-spacing: var(--career-tracking); }
+.tools__description { font: var(--skills-lead-type); letter-spacing: var(--skills-lead-tracking); }
+.design-values__title { font: var(--career-heading); letter-spacing: var(--career-tracking); }
+.design-values__name { font: var(--design-values-name-type); letter-spacing: var(--career-tracking); }
+.design-values__description { font: var(--design-values-description-type); letter-spacing: var(--career-tracking); }
+.case-title { font: var(--case-title-type); letter-spacing: var(--career-tracking); }
+.case-back { font: var(--case-back-type); letter-spacing: var(--career-tracking); }
+.case-facts__list { font: var(--case-facts-type); letter-spacing: var(--career-tracking); }
+.case-results__title { font: var(--case-caption-type); letter-spacing: var(--career-tracking); }
+.case-results__grid dt { font: var(--showcase-label-type); letter-spacing: normal; }
+.case-results__grid dd { font: var(--showcase-number-type); letter-spacing: normal; }
+.case-story__text { font: var(--showcase-description-type); letter-spacing: var(--career-tracking); }
+.contacts__display { font: var(--contacts-display-type); letter-spacing: normal; }
+.contacts__links { font: var(--contacts-link-type); letter-spacing: var(--contacts-link-tracking); }
+.contacts__invitation { font: var(--contacts-invitation-type); letter-spacing: normal; }
+.contacts__name { font: var(--contacts-name-type); letter-spacing: normal; }
+.contacts__details { font: var(--contacts-details-type); letter-spacing: normal; }
+.showcase__title { font: var(--showcase-heading-type); letter-spacing: var(--showcase-heading-tracking); }
+.showcase.is-animated .showcase__title {
+  font-size: calc(var(--showcase-hero-size) + (var(--showcase-heading-size) - var(--showcase-hero-size)) * var(--showcase-flight));
+}
+.showcase__case-title { font: var(--showcase-case-type); letter-spacing: var(--showcase-heading-tracking); }
+.showcase__description { font: var(--showcase-description-type); letter-spacing: var(--showcase-heading-tracking); }
+.showcase__tag { font: var(--showcase-tag-type); letter-spacing: normal; }
+.showcase__button { font: var(--showcase-button-type); letter-spacing: normal; }
+.showcase__metrics dt { font: var(--showcase-label-type); letter-spacing: normal; }
+.showcase__metrics dd { font: var(--showcase-number-type); letter-spacing: normal; }
+.hero__intro, .hero__stats { font-family: var(--font-hero-side); }
+.hero-greeting { font: var(--hero-greeting); }
+.expertise-lead { font: var(--expertise-lead-type); letter-spacing: var(--expertise-lead-tracking); }
+.expertise-copy { font: var(--expertise-copy-type); letter-spacing: var(--expertise-copy-tracking); }
+.body-m     { font-size: var(--fs-body-m); }
+.body-s     { font-size: var(--fs-body-s); }
+.muted      { color: var(--color-fg-muted); }
+.section--dark .muted { color: var(--color-fg-muted-on-dark); }
+
+/* Движение: пока JS не подготовил элемент, он скрыт – но только когда движение включено (html.has-motion).
+   Без JS, в ?static и при prefers-reduced-motion класса нет, и всё видно сразу */
+.has-motion [data-reveal]:not(.is-ready) { visibility: hidden; }
+
+/* Холст сцены: единственное абсолютное позиционирование по умолчанию (docs/scene.md) */
+[data-scene] { position: relative; }
+[data-scene] canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: var(--z-scene); }
+[data-scene] > :not(canvas) { position: relative; z-index: var(--z-content); }
+[data-scene].is-live .scene__fallback { display: none; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .wrapper { padding-inline: var(--page-margin-mobile); }
+  .section { padding-block: var(--space-section-mobile); }
+}

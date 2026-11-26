@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mask group">
+<mask id="mask0_0_5" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="54" height="54">
+<g id="Vector">
+<path d="M32.4 0H21.6V21.6H0V32.4H21.6V54H32.4V32.4H54V21.6H32.4V0Z" fill="white"/>
+<path d="M11.7265 4.08974L4.08973 11.7265L19.3632 27L4.08973 42.2735L11.7265 49.9103L27 34.6368L42.2735 49.9103L49.9103 42.2735L34.6367 27L49.9103 11.7265L42.2735 4.08974L27 19.3632L11.7265 4.08974Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_0_5)">
+<rect id="Gradient" x="-6.20565" y="-8.99981" width="71.82" height="71.82" fill="#FF0051"/>
+</g>
+</g>
+</svg>
