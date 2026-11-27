@@ -841,7 +841,7 @@ window.PORTFOLIO_CONTENT = {
           },
           "[\"\",3,0,1,2]": {
             "attrs": {
-              "background": "assets/uploads/4d52adf14c5b646d1e0d96b022d41c41dcb2bed79c1c1b27a9092a1925e5aff9.png"
+              "background": "assets/uploads/6de8ef07c5daef9b816dabef5676acfbeadcc2840d8d412ab63861b528a2e56b.png"
             }
           }
         }
