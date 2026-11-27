@@ -70,6 +70,16 @@ window.PORTFOLIO_CONTENT = {
         "text": {
           "0": "BPM"
         }
+      },
+      "[\"case-card-2\",0,3,2,1]": {
+        "text": {
+          "0": "1 543"
+        }
+      },
+      "[\"case-card-2\",0,3,2,0]": {
+        "text": {
+          "0": "Запуска за октябрь 2026"
+        }
       }
     }
   },
@@ -281,12 +291,12 @@ window.PORTFOLIO_CONTENT = {
           },
           "[\"case-card-2\",0,3,2,1]": {
             "style": {
-              "color": "#f2f2f2"
+              "color": "#4c4c4d"
             }
           },
           "[\"case-card-2\",0,3,2,0]": {
             "style": {
-              "color": "#f2f2f2"
+              "color": "#3d4344"
             }
           },
           "[\"case-card-2\",0,0]": {
