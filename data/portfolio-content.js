@@ -115,6 +115,11 @@ window.PORTFOLIO_CONTENT = {
         "text": {
           "0": "Доля PM-ов, использующих дашборд"
         }
+      },
+      "[\"portfolio-754d0bc2-0ada-4e9f-abf1-7aed2acbc555\"]": {
+        "text": {
+          "0": "FinTech"
+        }
       }
     }
   },
@@ -169,6 +174,17 @@ window.PORTFOLIO_CONTENT = {
       "anchor": "[\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\"]",
       "position": "after",
       "html": "\u003cp class=\"showcase__tag portfolio-copy portfolio-added\" lang=\"en\" id=\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\">Low-code\u003c/p>",
+      "layout": {
+        "order": "0"
+      }
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-754d0bc2-0ada-4e9f-abf1-7aed2acbc555",
+      "page": "index.html",
+      "anchor": "[\"case-card-3\",0,0]",
+      "position": "after",
+      "html": "\u003cp class=\"showcase__tag\" lang=\"en\">B2B\u003c/p>",
       "layout": {
         "order": "0"
       }
@@ -279,7 +295,7 @@ window.PORTFOLIO_CONTENT = {
           },
           "[\"case-card-3\",0,0]": {
             "style": {
-              "width": "68px"
+              "width": "60px"
             }
           },
           "[\"patent-popup\",0,1,1]": {
@@ -355,6 +371,12 @@ window.PORTFOLIO_CONTENT = {
           "[\"case-card-3\",0,3,2,0]": {
             "style": {
               "width": "170px"
+            }
+          },
+          "[\"portfolio-754d0bc2-0ada-4e9f-abf1-7aed2acbc555\"]": {
+            "style": {
+              "width": "80px",
+              "translate": "10px 0px"
             }
           }
         },
