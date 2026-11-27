@@ -874,6 +874,16 @@ window.PORTFOLIO_CONTENT = {
             "attrs": {
               "background": "assets/uploads/6de8ef07c5daef9b816dabef5676acfbeadcc2840d8d412ab63861b528a2e56b.png"
             }
+          },
+          "[\"portfolio-60c9fa2c-6fa0-49b2-ac9e-1173589d65de\"]": {
+            "style": {
+              "translate": "0px -60px"
+            }
+          },
+          "[\"portfolio-9e477498-a0ef-4908-bd96-8e07ee905638\"]": {
+            "style": {
+              "border-radius": "20px"
+            }
           }
         }
       },
