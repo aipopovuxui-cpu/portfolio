@@ -83,7 +83,7 @@ window.PORTFOLIO_CONTENT = {
       },
       "[\"case-card-3\",0,1]": {
         "text": {
-          "0": "Finance - финансовый модуль, часть системы Delivery Central"
+          "0": "FINANCE —  финансовый модуль, часть системы Delivery Central"
         }
       }
     }
