@@ -43,7 +43,7 @@ window.PORTFOLIO_CONTENT = {
       },
       "[\"case-card-2\",0,3,0,1]": {
         "text": {
-          "0": "98.5%"
+          "0": "↑ 98.5%"
         }
       },
       "[\"case-card-2\",0,3,0,0]": {
@@ -198,7 +198,27 @@ window.PORTFOLIO_CONTENT = {
       },
       "[\"case-card-5\",0,3,1,1]": {
         "text": {
-          "0": "100%"
+          "0": "↑ 100%"
+        }
+      },
+      "[\"case-card-5\",0,0]": {
+        "text": {
+          "0": "Enterprise Design System"
+        }
+      },
+      "[\"case-card-4\",0,0]": {
+        "text": {
+          "0": "Enterprise"
+        }
+      },
+      "[\"portfolio-a8d377c1-dc82-48d5-b27f-0e52e199a87b\"]": {
+        "text": {
+          "0": "SaaS"
+        }
+      },
+      "[\"portfolio-65c9df48-7f99-4daf-a999-2e3837078286\"]": {
+        "text": {
+          "0": "B2B"
         }
       }
     }
@@ -265,6 +285,28 @@ window.PORTFOLIO_CONTENT = {
       "anchor": "[\"case-card-3\",0,0]",
       "position": "after",
       "html": "\u003cp class=\"showcase__tag\" lang=\"en\">B2B\u003c/p>",
+      "layout": {
+        "order": "0"
+      }
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-a8d377c1-dc82-48d5-b27f-0e52e199a87b",
+      "page": "index.html",
+      "anchor": "[\"case-card-4\",0,0]",
+      "position": "after",
+      "html": "\u003cp class=\"showcase__tag\" lang=\"en\">Enterprise\u003c/p>",
+      "layout": {
+        "order": "0"
+      }
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-65c9df48-7f99-4daf-a999-2e3837078286",
+      "page": "index.html",
+      "anchor": "[\"portfolio-a8d377c1-dc82-48d5-b27f-0e52e199a87b\"]",
+      "position": "after",
+      "html": "\u003cp class=\"showcase__tag portfolio-copy portfolio-added\" lang=\"en\" id=\"portfolio-a8d377c1-dc82-48d5-b27f-0e52e199a87b\">SaaS\u003c/p>",
       "layout": {
         "order": "0"
       }
@@ -467,6 +509,28 @@ window.PORTFOLIO_CONTENT = {
           "[\"case-card-5\",0,2]": {
             "style": {
               "translate": "0px -30px"
+            }
+          },
+          "[\"case-card-5\",0,0]": {
+            "style": {
+              "width": "220px"
+            }
+          },
+          "[\"case-card-4\",0,0]": {
+            "style": {
+              "width": "106px"
+            }
+          },
+          "[\"portfolio-a8d377c1-dc82-48d5-b27f-0e52e199a87b\"]": {
+            "style": {
+              "width": "70px",
+              "translate": "10px 0px"
+            }
+          },
+          "[\"portfolio-65c9df48-7f99-4daf-a999-2e3837078286\"]": {
+            "style": {
+              "width": "60px",
+              "translate": "20px 0px"
             }
           }
         },
