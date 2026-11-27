@@ -581,6 +581,37 @@ window.PORTFOLIO_CONTENT = {
       "layout": {
         "order": "0"
       }
+    },
+    {
+      "id": "portfolio-9e477498-a0ef-4908-bd96-8e07ee905638",
+      "page": "case-5.html",
+      "type": "img",
+      "anchor": "[\"\",3,0,1]",
+      "position": "end",
+      "src": "assets/uploads/6de8ef07c5daef9b816dabef5676acfbeadcc2840d8d412ab63861b528a2e56b.png",
+      "alt": "",
+      "video": false,
+      "metrics": []
+    },
+    {
+      "id": "portfolio-bed31e8c-a313-4fda-b50b-de68a9852c78",
+      "page": "case-5.html",
+      "type": "text",
+      "anchor": "[\"\",3,0,1,3]",
+      "position": "after",
+      "text": "Спроектировать и внедрить единую платформу СБ «Северстали» для сбора данных всех подсистем, автоматизации учёта инцидентов, проверок и отчётности, KPI-дашбордов и аналитики рисков в реальном времени.",
+      "video": false,
+      "metrics": []
+    },
+    {
+      "id": "portfolio-60c9fa2c-6fa0-49b2-ac9e-1173589d65de",
+      "page": "case-5.html",
+      "type": "text",
+      "anchor": "[\"\",3,0,1]",
+      "position": "end",
+      "text": "Спроектировать и внедрить единую платформу СБ «Северстали» для сбора данных всех подсистем, автоматизации учёта инцидентов, проверок и отчётности, KPI-дашбордов и аналитики рисков в реальном времени.",
+      "video": false,
+      "metrics": []
     }
   ],
   "tokens": {},
