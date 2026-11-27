@@ -35,6 +35,11 @@ window.PORTFOLIO_CONTENT = {
         "text": {
           "0": "B2B"
         }
+      },
+      "[\"portfolio-c2ee3ab1-a1bf-44b1-b71c-c7c137145482\"]": {
+        "text": {
+          "0": "B2G"
+        }
       }
     }
   },
@@ -59,6 +64,17 @@ window.PORTFOLIO_CONTENT = {
       "text": "- Содержимое — можно назначить ссылку кнопке или тексту и удалить выбранный элемент. Удалённый элемент можно восстановить из списка.\n- Медиа — можно заменить изображение или видео для выбранной версии сайта.\n- Отменить — возвращает до 10 последних действий за сеанс. Работает и Ctrl+Z.\nНа мобильном первый экран теперь статичный, с первым кадром и без звуковой волны. Остальные разделы доступны обычной прокруткой.",
       "video": false,
       "metrics": []
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-c2ee3ab1-a1bf-44b1-b71c-c7c137145482",
+      "page": "index.html",
+      "anchor": "[\"eis-project\",0,0]",
+      "position": "after",
+      "html": "\u003cp class=\"showcase__tag\" lang=\"en\">Internal Enterprise System\u003c/p>",
+      "layout": {
+        "order": "0"
+      }
     }
   ],
   "tokens": {},
@@ -130,6 +146,11 @@ window.PORTFOLIO_CONTENT = {
             "style": {
               "border-radius": "8px"
             }
+          },
+          "[\"portfolio-c2ee3ab1-a1bf-44b1-b71c-c7c137145482\"]": {
+            "style": {
+              "translate": "-3px 1px"
+            }
           }
         }
       },
@@ -193,6 +214,17 @@ window.PORTFOLIO_CONTENT = {
           "[\"design-values\",1,2,0]": {
             "style": {
               "font-weight": "500"
+            }
+          },
+          "[\"portfolio-c2ee3ab1-a1bf-44b1-b71c-c7c137145482\"]": {
+            "style": {
+              "translate": "10px 0px",
+              "width": "60px"
+            }
+          },
+          "[\"eis-project\",0,0]": {
+            "style": {
+              "width": "230px"
             }
           }
         },
