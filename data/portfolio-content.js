@@ -64,7 +64,8 @@ window.PORTFOLIO_CONTENT = {
       "[\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\"]": {
         "text": {
           "0": "No-code"
-        }
+        },
+        "removed": true
       },
       "[\"portfolio-c14ec7cf-b4c7-45e4-8f10-d5862145f558\"]": {
         "text": {
@@ -487,7 +488,7 @@ window.PORTFOLIO_CONTENT = {
           "[\"portfolio-c14ec7cf-b4c7-45e4-8f10-d5862145f558\"]": {
             "style": {
               "width": "60px",
-              "translate": "20px 0px"
+              "translate": "10px 0px"
             }
           },
           "[\"case-card-3\",0,3,2,0]": {
