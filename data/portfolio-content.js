@@ -60,6 +60,16 @@ window.PORTFOLIO_CONTENT = {
         "text": {
           "0": "↓ 40%"
         }
+      },
+      "[\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\"]": {
+        "text": {
+          "0": "Low-code"
+        }
+      },
+      "[\"portfolio-c14ec7cf-b4c7-45e4-8f10-d5862145f558\"]": {
+        "text": {
+          "0": "BPM"
+        }
       }
     }
   },
@@ -92,6 +102,28 @@ window.PORTFOLIO_CONTENT = {
       "anchor": "[\"eis-project\",0,0]",
       "position": "after",
       "html": "\u003cp class=\"showcase__tag\" lang=\"en\">Internal Enterprise System\u003c/p>",
+      "layout": {
+        "order": "0"
+      }
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038",
+      "page": "index.html",
+      "anchor": "[\"case-card-2\",0,0]",
+      "position": "after",
+      "html": "\u003cp class=\"showcase__tag\" lang=\"en\">Internal Enterprise System\u003c/p>",
+      "layout": {
+        "order": "0"
+      }
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-c14ec7cf-b4c7-45e4-8f10-d5862145f558",
+      "page": "index.html",
+      "anchor": "[\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\"]",
+      "position": "after",
+      "html": "\u003cp class=\"showcase__tag portfolio-copy portfolio-added\" lang=\"en\" id=\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\">Low-code\u003c/p>",
       "layout": {
         "order": "0"
       }
@@ -255,6 +287,23 @@ window.PORTFOLIO_CONTENT = {
           "[\"case-card-2\",0,3,2,0]": {
             "style": {
               "color": "#f2f2f2"
+            }
+          },
+          "[\"case-card-2\",0,0]": {
+            "style": {
+              "width": "230px"
+            }
+          },
+          "[\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\"]": {
+            "style": {
+              "width": "106px",
+              "translate": "10px 0px"
+            }
+          },
+          "[\"portfolio-c14ec7cf-b4c7-45e4-8f10-d5862145f558\"]": {
+            "style": {
+              "width": "60px",
+              "translate": "20px 0px"
             }
           }
         },
