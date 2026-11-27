@@ -822,6 +822,13 @@ window.PORTFOLIO_CONTENT = {
               "font-family": "Onest"
             }
           }
+        },
+        "case-5.html": {
+          "[\"\",3,0,1,0,0]": {
+            "attrs": {
+              "background": "assets/uploads/f3eadc028cba19627c5d92ec26afd0a14b876cbcc7f418c83f6c4818cdd5b48f.png"
+            }
+          }
         }
       },
       "tokens": {}
