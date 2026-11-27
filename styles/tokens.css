@@ -428,7 +428,7 @@
   --case-mark-size: 66px;
   --case-mark-ink: #e7e7e7;
   --case-column-gap: 40px;
-  --case-panel-height: 860px;
+  --case-panel-height: 840px;
   --case-panel-padding: clamp(16px, 1.37vw, 26px);
   --case-muted: #a4a4a4;
   --case-back-ink: #979797;

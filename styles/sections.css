@@ -1182,7 +1182,10 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
 /* Страницы проектов */
 .case-page { background: var(--color-bg-page); color: var(--showcase-ink); }
 .case-page .site-header { background: var(--color-bg-page); }
-.case-layout { padding: var(--case-header-offset) var(--case-inset-end) var(--case-column-gap) var(--case-inset); }
+.case-layout {
+  --case-sticky-height: calc(100dvh - var(--case-header-offset) - var(--case-column-gap) - var(--space-4));
+  padding: var(--case-header-offset) var(--case-inset-end) var(--case-column-gap) var(--case-inset);
+}
 .case-columns {
   display: grid;
   grid-template-columns: minmax(0, 341fr) minmax(0, 1053fr) minmax(0, 319fr);
@@ -1192,12 +1195,12 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
 .case-sidebar, .case-rail {
   position: sticky;
   inset-block-start: var(--case-header-offset);
-  max-block-size: calc(100dvh - var(--case-header-offset) - var(--space-16));
-  overflow: auto;
   overflow-wrap: anywhere;
 }
 .case-sidebar {
-  min-block-size: min(var(--case-panel-height), calc(100dvh - var(--case-header-offset) - var(--space-16)));
+  min-block-size: min(var(--case-panel-height), var(--case-sticky-height));
+  max-block-size: var(--case-sticky-height);
+  overflow: auto;
   padding: var(--space-24) var(--case-panel-padding);
   margin-inline-end: var(--case-side-gap);
   border-radius: var(--showcase-radius);
@@ -1247,6 +1250,12 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
   rotate: var(--case-mark-rotation, 0turn);
 }
 .case-mark:hover { color: var(--hero-pink); }
+@media (min-width: 1001px) {
+  .case-results {
+    max-block-size: var(--case-sticky-height);
+    overflow: hidden auto;
+  }
+}
 .case-results__title { margin-block-end: var(--space-20); text-wrap: wrap; }
 .case-results__grid { display: grid; gap: var(--space-16); }
 .case-results__grid > div {
@@ -1274,8 +1283,8 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
 }
 @media (max-width: 1000px) {
   .case-columns { grid-template-columns: minmax(0, 1fr); }
-  .case-sidebar, .case-rail { position: static; max-block-size: none; overflow: visible; }
-  .case-sidebar { min-block-size: 0; margin-inline-end: 0; }
+  .case-sidebar, .case-rail { position: static; }
+  .case-sidebar { min-block-size: 0; max-block-size: none; overflow: visible; margin-inline-end: 0; }
   .case-rail { grid-template-columns: minmax(0, 1fr); }
   .case-mark { grid-column: 1; grid-row: auto; justify-self: end; inline-size: var(--case-mark-size); }
   .case-results__grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--case-results-width)), 1fr)); }
