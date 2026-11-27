@@ -63,7 +63,7 @@ window.PORTFOLIO_CONTENT = {
       },
       "[\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\"]": {
         "text": {
-          "0": "Low-code"
+          "0": "No-code"
         }
       },
       "[\"portfolio-c14ec7cf-b4c7-45e4-8f10-d5862145f558\"]": {
@@ -306,7 +306,7 @@ window.PORTFOLIO_CONTENT = {
           },
           "[\"portfolio-3c7d0109-f6e8-4d5d-9383-1628825ae038\"]": {
             "style": {
-              "width": "106px",
+              "width": "90px",
               "translate": "10px 0px"
             }
           },
