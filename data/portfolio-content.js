@@ -179,6 +179,21 @@ window.PORTFOLIO_CONTENT = {
             "attrs": {
               "background": "assets/uploads/60a96eb38f8dcbf329ce7d09fb0d78203c6f3ab29cdb9cceb90464b2c66639aa.png"
             }
+          },
+          "[\"design-values\",1,0,0]": {
+            "style": {
+              "font-weight": "500"
+            }
+          },
+          "[\"design-values\",1,1,0]": {
+            "style": {
+              "font-weight": "500"
+            }
+          },
+          "[\"design-values\",1,2,0]": {
+            "style": {
+              "font-weight": "500"
+            }
           }
         },
         "eis-sob.html": {
