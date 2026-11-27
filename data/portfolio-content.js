@@ -375,7 +375,7 @@ window.PORTFOLIO_CONTENT = {
           },
           "[\"portfolio-754d0bc2-0ada-4e9f-abf1-7aed2acbc555\"]": {
             "style": {
-              "width": "80px",
+              "width": "88px",
               "translate": "10px 0px"
             }
           }
