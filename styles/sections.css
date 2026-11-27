@@ -36,17 +36,19 @@
 @keyframes hero-frame-approach {
   to { opacity: 1; scale: 1; }
 }
-.hero__scroll-cue {
+.hero__scroll-cue, .showcase__scroll-cue {
   display: none;
-  grid-area: 1 / 1;
-  place-self: end center;
   height: var(--hero-cue-height);
   width: auto;
-  margin-bottom: calc(var(--hero-cue-inset) + var(--hero-bottom-lift));
   opacity: .5;
   z-index: var(--z-content);
   pointer-events: none;
   transition: opacity var(--dur-300) ease-out;
+}
+.hero__scroll-cue {
+  grid-area: 1 / 1;
+  place-self: end center;
+  margin-bottom: calc(var(--hero-cue-inset) + var(--hero-bottom-lift));
 }
 .hero.is-sequenced .hero__scroll-cue { display: block; }
 .hero__screen.has-scrolled .hero__scroll-cue {
@@ -1051,6 +1053,15 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
   inset-block-start: 0;
   min-block-size: 100svh;
   background: var(--color-bg-page);
+}
+.showcase.is-animated .showcase__scroll-cue {
+  display: block;
+  position: absolute;
+  inset-block-start: calc(100svh - var(--hero-cue-inset) - var(--hero-bottom-lift) - var(--hero-cue-height));
+  inset-inline: 0;
+  margin-inline: auto;
+  filter: brightness(0);
+  opacity: max(0, calc(.5 - 4 * var(--showcase-flight)));
 }
 .showcase__heading { block-size: calc(var(--showcase-heading-height) + var(--showcase-heading-gap)); }
 .showcase.is-intro-landing .showcase__lead { padding-block-start: 0; }
