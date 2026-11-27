@@ -813,6 +813,11 @@ window.PORTFOLIO_CONTENT = {
             "attrs": {
               "background": "assets/uploads/b8a206db346b3cc2cd45a3f2e7d730913096f817cae94ed691fbc2c6bf5ab294.png"
             }
+          },
+          "[\"case-card-4\",1]": {
+            "attrs": {
+              "background": "assets/uploads/d3520315d44a7b971e2318c800e76e67a2538b7f144ded45eae7eee34c632dc0.png"
+            }
           }
         },
         "eis-sob.html": {
