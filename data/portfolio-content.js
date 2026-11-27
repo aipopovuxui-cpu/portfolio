@@ -38,7 +38,7 @@ window.PORTFOLIO_CONTENT = {
       },
       "[\"portfolio-c2ee3ab1-a1bf-44b1-b71c-c7c137145482\"]": {
         "text": {
-          "0": "B2G"
+          "0": "B2E"
         }
       }
     }
