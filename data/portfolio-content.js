@@ -418,6 +418,11 @@ window.PORTFOLIO_CONTENT = {
               "width": "88px",
               "translate": "10px 0px"
             }
+          },
+          "[\"case-card-4\",0,3,2,0]": {
+            "style": {
+              "width": "180px"
+            }
           }
         },
         "eis-sob.html": {
