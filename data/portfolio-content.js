@@ -177,7 +177,7 @@ window.PORTFOLIO_CONTENT = {
           },
           "[\"case-card-2\",1]": {
             "attrs": {
-              "background": "assets/uploads/60a96eb38f8dcbf329ce7d09fb0d78203c6f3ab29cdb9cceb90464b2c66639aa.png"
+              "background": "assets/uploads/a5db8e25028a7e319c43e7bc2713fa135d4c60479b658e6030638ba63483883f.png"
             }
           },
           "[\"design-values\",1,0,0]": {
