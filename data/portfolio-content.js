@@ -223,7 +223,8 @@ window.PORTFOLIO_CONTENT = {
         "index.html": {
           "[\"hero\",0,1,1,0]": {
             "style": {
-              "translate": "-20px 0px"
+              "translate": "-20px 0px",
+              "font-weight": "400"
             }
           },
           "[\"hero\",0,1,1,2]": {
