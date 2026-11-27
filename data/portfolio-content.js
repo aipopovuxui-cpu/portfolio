@@ -803,6 +803,11 @@ window.PORTFOLIO_CONTENT = {
               "width": "60px",
               "translate": "20px 0px"
             }
+          },
+          "[\"case-card-5\",1]": {
+            "attrs": {
+              "background": "assets/uploads/f3eadc028cba19627c5d92ec26afd0a14b876cbcc7f418c83f6c4818cdd5b48f.png"
+            }
           }
         },
         "eis-sob.html": {
