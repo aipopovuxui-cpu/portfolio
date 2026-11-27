@@ -98,7 +98,7 @@ window.PORTFOLIO_CONTENT = {
       },
       "[\"case-card-3\",0,3,1,1]": {
         "text": {
-          "0": "↓ 40%"
+          "0": "↓ 60%"
         }
       },
       "[\"case-card-3\",0,3,1,0]": {
