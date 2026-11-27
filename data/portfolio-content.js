@@ -541,17 +541,6 @@ window.PORTFOLIO_CONTENT = {
               "border-radius": "20px"
             }
           },
-          "[\"\",3,0,0,0]": {
-            "style": {
-              "font-size": "18px",
-              "gap": "8px"
-            }
-          },
-          "[\"\",3,0,1]": {
-            "style": {
-              "translate": "20px 0px"
-            }
-          },
           "[\"portfolio-bc75ea72-80b1-4803-af4d-4bc480e2282c\"]": {
             "style": {
               "line-height": "1.2",
