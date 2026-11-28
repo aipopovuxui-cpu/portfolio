@@ -34,7 +34,7 @@ const brandScroll = el => {
   update();
 };
 
-const expertiseTyping = el => {
+const expertiseTyping = (el, scrub = false) => {
   if (!window.CSS?.highlights || !window.Highlight) return () => {};
   const name = 'expertise-untyped';
   let highlight = CSS.highlights.get(name);
@@ -71,6 +71,7 @@ const expertiseTyping = el => {
     }
   };
   render(0);
+  if (scrub === true) return render;
   return target => {
     cancelAnimationFrame(frame);
     if (progress === target) return;
@@ -219,21 +220,45 @@ const frameSequence = (screen) => {
   const total = Number(screen.dataset.frameCount);
   const expertiseFrame = Number(screen.dataset.expertiseFrame);
   const distance = parseFloat(css('--hero-scroll-distance'));
+  const swapDistance = parseFloat(css('--hero-focus-swap-distance'));
+  const revealDistance = parseFloat(css('--hero-focus-reveal-distance'));
+  const holdDistance = parseFloat(css('--hero-focus-hold-distance'));
+  const specialization = screen.querySelector('.hero__expertise');
+  const focusText = screen.querySelector('.hero__focus > .hero-focus-copy');
+  const typeFocus = focusText ? expertiseTyping(focusText, true) : () => {};
   const fadeDistance = parseFloat(css('--hero-fade-distance'));
   const sideBlocks = screen.querySelectorAll('.hero__intro, .hero__stats');
   const stats = screen.querySelector('.hero__stats');
   const chat = screen.querySelector('.hero__chat');
   const loaded = new Set([1]);
   const originalSource = image.dataset.portfolioFrameSource || image.src;
+  const finalSource = image.dataset.finalFrame;
   const mobile = window.matchMedia('(max-width: 768px)');
+  const focusBars = screen.querySelectorAll('.hero-focus-bar');
+  const firstFocusYear = focusBars[0]?.closest('.hero-focus-year');
+  const startFocusChart = () => screen.classList.add('has-focus-fill');
+  const focusObserver = new IntersectionObserver(([entry]) => {
+    if (entry.intersectionRatio >= 0.5) {
+      startFocusChart();
+      focusObserver.disconnect();
+    }
+  }, { threshold: 0.5 });
+  if (focusBars.length) {
+    screen.classList.add('has-focus-motion');
+    focusBars[focusBars.length - 1].addEventListener('animationend', event => {
+      if (event.animationName === 'hero-focus-fill') screen.classList.add('has-focus-chart');
+    });
+  }
   const fixedImage = image.hasAttribute('data-portfolio-still') && !image.dataset.portfolioFrameSource;
-  const queue = new Set(fixedImage ? [] : Array.from({ length: total - 1 }, (_, i) => i + 2));
+  const queue = new Set(fixedImage ? [] : [total, ...Array.from({ length: total - 2 }, (_, i) => i + 2)]);
   let target = 1;
   let rendered = 1;
   let inFlight = 0;
   let updatePending = false;
 
-  const frameURL = number => new URL(`${number}.jpg`, originalSource).href;
+  const frameURL = number => number === total && finalSource
+    ? new URL(finalSource, document.baseURI).href
+    : new URL(`${number}.jpg`, originalSource).href;
   const draw = () => {
     if (mobile.matches || image.hasAttribute('data-portfolio-still') || !loaded.has(target)) return;
     const source = frameURL(target);
@@ -272,6 +297,27 @@ const frameSequence = (screen) => {
     screen.style.setProperty('--hero-side-progress', Math.min(1, offset / window.innerHeight));
     const progress = Math.min(1, offset / distance);
     target = 1 + Math.round(progress * (total - 1));
+    const swap = Math.min(1, Math.max(0, (offset - distance) / swapDistance));
+    const afterSpecialization = offset - distance - swapDistance;
+    const reveal = Math.min(1, Math.max(0, afterSpecialization / revealDistance));
+    if (reveal === 1) startFocusChart();
+    const exitStart = revealDistance + holdDistance;
+    const exit = Math.min(1, Math.max(0, (afterSpecialization - exitStart) / swapDistance));
+    const exitShift = exit * exit * (3 - 2 * exit);
+    const exitFog = Math.max(0, (exit - 0.45) / 0.55);
+    const appear = 1 - (1 - reveal) ** 3;
+    screen.classList.toggle('has-focus-exited', exit === 1);
+    const shift = swap * swap * (3 - 2 * swap);
+    const fog = Math.max(0, (swap - 0.45) / 0.55);
+    screen.style.setProperty('--hero-specialization-y', `${-70 * shift}dvh`);
+    screen.style.setProperty('--hero-specialization-opacity', 1 - fog);
+    screen.style.setProperty('--hero-specialization-blur', `calc(${fog} * var(--space-16))`);
+    specialization.style.visibility = swap === 1 ? 'hidden' : '';
+    screen.style.setProperty('--hero-focus-visibility', reveal > 0 && exit < 1 ? 'visible' : 'hidden');
+    screen.style.setProperty('--hero-focus-opacity', appear * (1 - exitFog));
+    screen.style.setProperty('--hero-focus-y', `calc(${1 - appear} * var(--space-16) - ${95 * exitShift}dvh)`);
+    screen.style.setProperty('--hero-focus-blur', `calc(${exitFog} * var(--space-16))`);
+    typeFocus(reveal);
     const expertiseActive = target >= expertiseFrame;
     if (screen.classList.contains('has-expertise') !== expertiseActive) {
       screen.classList.toggle('has-expertise', expertiseActive);
@@ -309,10 +355,15 @@ const frameSequence = (screen) => {
   const switchMode = () => {
     section.classList.toggle('is-sequenced', !mobile.matches);
     if (mobile.matches) {
-      screen.classList.remove('has-scrolled', 'has-expertise');
+      screen.classList.remove('has-scrolled', 'has-expertise', 'has-focus-exited');
+      specialization.style.visibility = '';
+      screen.style.removeProperty('--hero-focus-opacity');
+      if (firstFocusYear && !screen.classList.contains('has-focus-fill')) focusObserver.observe(firstFocusYear);
+      typeFocus(1);
       if (!image.hasAttribute('data-portfolio-still')) image.src = originalSource;
       return;
     }
+    focusObserver.disconnect();
     measureBlocks();
   };
   mobile.addEventListener('change', switchMode);

@@ -32,10 +32,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- Стили: порядок важен – токены → база → компоненты → секции. Перед выкладкой поднять ?v=N -->
-  <link rel="stylesheet" href="styles/tokens.css?v=3">
+  <link rel="stylesheet" href="styles/tokens.css?v=8">
   <link rel="stylesheet" href="styles/base.css?v=7">
   <link rel="stylesheet" href="styles/components.css?v=3">
-  <link rel="stylesheet" href="styles/sections.css?v=8">
+  <link rel="stylesheet" href="styles/sections.css?v=14">
   <link rel="stylesheet" href="styles/portfolio-content.css?v=9">
 
   <!-- 3D: Three.js через importmap, грузится лениво из js/scene.js только если на странице есть [data-scene] -->
@@ -90,7 +90,7 @@
   <main>
     <section id="hero" class="section section--dark hero" aria-labelledby="hero-title">
       <div class="hero__screen" data-reveal="frame-sequence" data-frame-count="90" data-expertise-frame="50">
-        <img class="hero__frame" data-reveal="frame-approach" src="https://raw.githubusercontent.com/aipopovuxui-cpu/ui/06da657cb4cadb976e70baa6924a7b380da10fae/1.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+        <img class="hero__frame" data-reveal="frame-approach" data-final-frame="assets/img/hero/dialog-final.jpg" src="https://raw.githubusercontent.com/aipopovuxui-cpu/ui/06da657cb4cadb976e70baa6924a7b380da10fae/1.jpg" alt="" width="1920" height="1080" fetchpriority="high">
         <div class="hero__content">
           <h1 id="hero-title" class="hero__title hero-display" lang="en" aria-label="Senior Product Ai Designer">
             <span class="hero-senior">Senior</span> <span>Product</span> <span><small class="hero__title-ai"><span>Ai</span></small><span class="hero__title-designer">Designer</span></span>
@@ -151,7 +151,7 @@
             <li data-speaker="assistant" aria-label="Ты"><p>Жду твой первый бриф, задачу или вводные данные по проекту.</p></li>
           </ol>
         </div>
-        <aside class="hero__expertise" data-reveal="frame-expertise" aria-label="О специализации">
+        <aside id="hero-specialization" class="hero__expertise" data-reveal="frame-expertise" aria-label="О специализации">
           <h2 class="expertise-lead">Моя специализация</h2>
           <div class="expertise-chips" aria-label="Направления специализации">
             <div class="expertise-chips__row">
@@ -173,7 +173,38 @@
             <p>Внедряю AI-инструменты для повышения качества решений и улучшения результатов.</p>
           </div>
         </aside>
+        <aside id="work-focus" class="hero__focus" aria-label="Фокус работы в 2025 и 2026 годах">
+          <p class="hero-focus-copy">В 2025 году основной фокус был на дизайне и проектировании, а в 2026-м я перераспределил время в пользу исследований, коммуникации со стейкхолдерами и кодинга для более глубокого погружения в продукт.</p>
+          <div class="hero-focus-year" role="group" aria-labelledby="focus-year-2025">
+            <p id="focus-year-2025" class="hero-focus-copy">2025</p>
+            <div class="hero-focus-bar">
+              <span class="hero-focus-segment hero-focus-color--design" style="width: 68.6%" role="img" aria-labelledby="focus-design"></span>
+              <span class="hero-focus-segment hero-focus-color--research" style="width: 11.9%" role="img" aria-labelledby="focus-research"></span>
+              <span class="hero-focus-segment hero-focus-color--documents" style="width: 7.6%" role="img" aria-labelledby="focus-documents"></span>
+              <span class="hero-focus-segment hero-focus-color--alignment" style="width: 7.6%" role="img" aria-labelledby="focus-alignment"></span>
+              <span class="hero-focus-segment hero-focus-color--coding" style="width: 4.3%" role="img" aria-labelledby="focus-coding"></span>
+            </div>
+          </div>
+          <div class="hero-focus-year" role="group" aria-labelledby="focus-year-2026">
+            <p id="focus-year-2026" class="hero-focus-copy">2026</p>
+            <div class="hero-focus-bar">
+              <span class="hero-focus-segment hero-focus-color--design" style="width: 20%" role="img" aria-labelledby="focus-design"></span>
+              <span class="hero-focus-segment hero-focus-color--research" style="width: 20%" role="img" aria-labelledby="focus-research"></span>
+              <span class="hero-focus-segment hero-focus-color--documents" style="width: 20%" role="img" aria-labelledby="focus-documents"></span>
+              <span class="hero-focus-segment hero-focus-color--alignment" style="width: 20%" role="img" aria-labelledby="focus-alignment"></span>
+              <span class="hero-focus-segment hero-focus-color--coding" style="width: 20%" role="img" aria-labelledby="focus-coding"></span>
+            </div>
+          </div>
+          <ul class="hero-focus-legend">
+            <li id="focus-design" class="hero-focus-color--design">Design work</li>
+            <li id="focus-research" class="hero-focus-color--research">User Research</li>
+            <li id="focus-documents" class="hero-focus-color--documents">Writing documents</li>
+            <li id="focus-alignment" class="hero-focus-color--alignment">Stakeholder alignment</li>
+            <li id="focus-coding" class="hero-focus-color--coding">Coding</li>
+          </ul>
+        </aside>
         <img class="hero__scroll-cue" src="assets/img/hero/Scroll_Down.gif" width="20" height="32" alt="Прокрутите вниз">
+        <img class="hero__scroll-cue hero__scroll-cue--focus" src="assets/img/hero/Scroll_Down.gif" width="20" height="32" alt="">
       </div>
     </section>
     <section id="expertise" aria-labelledby="skills-title">
@@ -577,8 +608,8 @@
     </section>
   </main>
 
-  <script src="data/portfolio-content.js?v=636b320e5ced"></script>
+  <script src="data/portfolio-content.js?v=437093f397e1"></script>
   <script src="js/portfolio-content.js?v=8" data-apply></script>
-  <script type="module" src="js/main.js?v=8"></script>
+  <script type="module" src="js/main.js?v=13"></script>
 </body>
 </html>

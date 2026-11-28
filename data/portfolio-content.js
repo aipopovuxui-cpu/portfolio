@@ -221,6 +221,11 @@ window.PORTFOLIO_CONTENT = {
         "text": {
           "0": "B2B"
         }
+      },
+      "[\"portfolio-d91dc645-fa19-44d4-8bde-1b0767f009e9\"]": {
+        "text": {
+          "0": "B2E"
+        }
       }
     },
     "case-2.html": {
@@ -622,6 +627,17 @@ window.PORTFOLIO_CONTENT = {
       "text": "Спроектировать и внедрить единую платформу СБ «Северстали» для сбора данных всех подсистем, автоматизации учёта инцидентов, проверок и отчётности, KPI-дашбордов и аналитики рисков в реальном времени.",
       "video": false,
       "metrics": []
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-d91dc645-fa19-44d4-8bde-1b0767f009e9",
+      "page": "index.html",
+      "anchor": "[\"hero-specialization\",1,0,3]",
+      "position": "after",
+      "html": "\u003cspan class=\"expertise-chip expertise-chip--b2c\">B2C\u003c/span>",
+      "layout": {
+        "order": "0"
+      }
     }
   ],
   "tokens": {},
@@ -858,6 +874,79 @@ window.PORTFOLIO_CONTENT = {
           "[\"case-card-4\",1]": {
             "attrs": {
               "background": "assets/uploads/d3520315d44a7b971e2318c800e76e67a2538b7f144ded45eae7eee34c632dc0.png"
+            }
+          },
+          "[\"hero-specialization\",1,0,0]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"hero-specialization\",1,0,1]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "-10px 0px"
+            }
+          },
+          "[\"hero-specialization\",1,0,2]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "-20px 0px"
+            }
+          },
+          "[\"hero-specialization\",1,0,3]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "-30px 0px"
+            }
+          },
+          "[\"hero-specialization\",1,1,0]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "0px -10px"
+            }
+          },
+          "[\"hero-specialization\",1,1,1]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "-10px -10px"
+            }
+          },
+          "[\"portfolio-d91dc645-fa19-44d4-8bde-1b0767f009e9\"]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "-20px 0px"
+            }
+          },
+          "[\"hero-specialization\",1,2,0]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "0px -20px"
+            }
+          },
+          "[\"work-focus\",1,1,0]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",2,1,0]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",0]": {
+            "style": {
+              "font-size": "20px",
+              "line-height": "1.2"
+            }
+          },
+          "[\"hero-specialization\",2,0]": {
+            "style": {
+              "translate": "0px -30px"
+            }
+          },
+          "[\"hero-specialization\",2,1]": {
+            "style": {
+              "translate": "0px -30px"
             }
           }
         },
