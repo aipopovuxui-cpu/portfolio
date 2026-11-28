@@ -344,12 +344,25 @@
     }
   }
 
+  function mainSections(doc, order = []) {
+    const main = doc.querySelector('main');
+    const sections = main ? children(main).filter(node => node.matches('section[id]')) : [];
+    const byId = new Map(sections.map(node => [node.id, node]));
+    const sorted = [];
+    for (const id of order) {
+      if (byId.has(id)) sorted.push(byId.get(id));
+      byId.delete(id);
+    }
+    return [...sorted, ...byId.values()];
+  }
+
   function apply(doc, page, content, previewDevice) {
     for (const [property, value] of Object.entries(content.tokens || {})) style(doc.documentElement, property, value);
     const edits = Object.entries(content.edits?.[page] || {});
     const originalElements = edits.map(([key, edit]) => [resolve(doc, key), edit]);
     const blocks = (content.blocks || []).filter(block => block.page === page);
     const anchors = blocks.map(block => resolve(doc, block.anchor));
+    const sectionAttachments = new Map();
     const startTail = new Map();
     const afterTail = new Map();
     blocks.forEach((block, index) => {
@@ -373,15 +386,36 @@
       } else {
         anchor.append(element);
       }
+      if (element.parentElement?.matches('main') && ['before', 'after'].includes(block.position)) {
+        const section = anchor.matches('section[id]') ? anchor : sectionAttachments.get(anchor);
+        if (section) sectionAttachments.set(element, section);
+      }
     });
     edits.forEach(([key, edit], index) => {
       const element = originalElements[index][0] || resolve(doc, key);
       if (element) applyEdit(element, edit);
     });
     bindVariants(doc, page, content.variants, previewDevice);
+    if (page === 'index.html' && content.sectionOrder?.length) {
+      const sections = mainSections(doc);
+      const ordered = mainSections(doc, content.sectionOrder);
+      const placement = node => node.closest('main > *');
+      const groups = new Map(sections.map(section => [section, []]));
+      const sectionByRoot = new Map(sections.map(section => [placement(section), section]));
+      for (const child of doc.querySelectorAll('main > *')) {
+        const section = sectionByRoot.get(child) || sectionAttachments.get(child);
+        groups.get(section)?.push(child);
+      }
+      const markers = sections.map(node => {
+        const marker = doc.createComment('section');
+        placement(node).before(marker);
+        return marker;
+      });
+      markers.forEach((marker, index) => marker.replaceWith(...groups.get(ordered[index])));
+    }
   }
 
-  window.PortfolioEditor = { address, apply, canLink, children, pages, readRecommendation, resolve, showRecommendation, textSlots, url };
+  window.PortfolioEditor = { address, apply, canLink, children, mainSections, pages, readRecommendation, resolve, showRecommendation, textSlots, url };
   if (script?.hasAttribute('data-apply') && window.PORTFOLIO_CONTENT) {
     const name = location.pathname.split('/').at(-1);
     const page = pages.includes(name) || Object.hasOwn(window.PORTFOLIO_CONTENT.cases || {}, name) ? name : pages[0];

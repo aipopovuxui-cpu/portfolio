@@ -74,8 +74,7 @@ document.addEventListener('pointermove', event => {
   if (patentCard.contains(event.target)) showPatent();
   else if (projectsCard.contains(event.target)) showProjects();
 }, { passive: true });
-const expertiseSection = document.querySelector('#expertise');
-const contactsSection = document.querySelector('#section-5');
+const lightHeaderSections = document.querySelectorAll('#expertise, #professional-experience, #tools, #section-4, #client-recommendations, #design-values, #section-5');
 const scrollProgress = document.querySelector('.scroll-progress');
 const updateScrollProgress = () => {
   const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
@@ -90,7 +89,7 @@ window.addEventListener('resize', updateScrollProgress, { passive: true });
 updateScrollProgress();
 const updateHeaderTheme = () => {
   const headerBottom = siteHeader.offsetHeight;
-  const onLight = [expertiseSection, contactsSection].some(section => {
+  const onLight = [...lightHeaderSections].some(section => {
     const bounds = section.getBoundingClientRect();
     return bounds.top <= headerBottom && bounds.bottom > headerBottom;
   });
