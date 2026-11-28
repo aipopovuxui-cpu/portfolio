@@ -1038,7 +1038,16 @@ window.PORTFOLIO_CONTENT = {
         "case-5.html": {
           "[\"\",3,0,1,0,0]": {
             "attrs": {
-              "background": "assets/uploads/f3eadc028cba19627c5d92ec26afd0a14b876cbcc7f418c83f6c4818cdd5b48f.png"
+              "background": "assets/uploads/f3eadc028cba19627c5d92ec26afd0a14b876cbcc7f418c83f6c4818cdd5b48f.png",
+              "src": "assets/uploads/f3eadc028cba19627c5d92ec26afd0a14b876cbcc7f418c83f6c4818cdd5b48f.png"
+            },
+            "style": {
+              "height": "auto",
+              "max-height": "none",
+              "aspect-ratio": "880 / 620",
+              "width": "100%",
+              "max-width": "100%",
+              "object-fit": "contain"
             }
           },
           "[\"\",3,0,1,2]": {
@@ -1054,6 +1063,11 @@ window.PORTFOLIO_CONTENT = {
           "[\"portfolio-9e477498-a0ef-4908-bd96-8e07ee905638\"]": {
             "style": {
               "border-radius": "20px"
+            }
+          },
+          "[\"\",3,0,1,0]": {
+            "style": {
+              "aspect-ratio": "880 / 620"
             }
           }
         }
