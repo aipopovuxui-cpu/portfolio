@@ -235,14 +235,18 @@ const frameSequence = (screen) => {
   const finalSource = image.dataset.finalFrame;
   const mobile = window.matchMedia('(max-width: 768px)');
   const focusBars = screen.querySelectorAll('.hero-focus-bar');
-  const firstFocusYear = focusBars[0]?.closest('.hero-focus-year');
+  const focusYears = screen.querySelectorAll('.hero-focus-year');
+  const visibleFocusYears = new Set();
   const startFocusChart = () => screen.classList.add('has-focus-fill');
-  const focusObserver = new IntersectionObserver(([entry]) => {
-    if (entry.intersectionRatio >= 0.5) {
-      startFocusChart();
-      focusObserver.disconnect();
+  const resetFocusChart = () => screen.classList.remove('has-focus-fill', 'has-focus-chart');
+  const focusObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) visibleFocusYears.add(entry.target);
+      else visibleFocusYears.delete(entry.target);
     }
-  }, { threshold: 0.5 });
+    if (!visibleFocusYears.size) resetFocusChart();
+    else if (entries.some(entry => entry.intersectionRatio >= 0.5)) startFocusChart();
+  }, { threshold: [0, 0.5] });
   if (focusBars.length) {
     screen.classList.add('has-focus-motion');
     focusBars[focusBars.length - 1].addEventListener('animationend', event => {
@@ -300,9 +304,10 @@ const frameSequence = (screen) => {
     const swap = Math.min(1, Math.max(0, (offset - distance) / swapDistance));
     const afterSpecialization = offset - distance - swapDistance;
     const reveal = Math.min(1, Math.max(0, afterSpecialization / revealDistance));
-    if (reveal === 1) startFocusChart();
     const exitStart = revealDistance + holdDistance;
     const exit = Math.min(1, Math.max(0, (afterSpecialization - exitStart) / swapDistance));
+    if (reveal === 0 || exit === 1) resetFocusChart();
+    else if (reveal === 1) startFocusChart();
     const exitShift = exit * exit * (3 - 2 * exit);
     const exitFog = Math.max(0, (exit - 0.45) / 0.55);
     const appear = 1 - (1 - reveal) ** 3;
@@ -358,12 +363,13 @@ const frameSequence = (screen) => {
       screen.classList.remove('has-scrolled', 'has-expertise', 'has-focus-exited');
       specialization.style.visibility = '';
       screen.style.removeProperty('--hero-focus-opacity');
-      if (firstFocusYear && !screen.classList.contains('has-focus-fill')) focusObserver.observe(firstFocusYear);
+      focusYears.forEach(year => focusObserver.observe(year));
       typeFocus(1);
       if (!image.hasAttribute('data-portfolio-still')) image.src = originalSource;
       return;
     }
     focusObserver.disconnect();
+    visibleFocusYears.clear();
     measureBlocks();
   };
   mobile.addEventListener('change', switchMode);

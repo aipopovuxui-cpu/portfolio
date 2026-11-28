@@ -226,6 +226,11 @@ window.PORTFOLIO_CONTENT = {
         "text": {
           "0": "B2E"
         }
+      },
+      "[\"portfolio-dc72f733-a686-4f70-8311-687702bec8d4\"]": {
+        "text": {
+          "0": "HealthTech"
+        }
       }
     },
     "case-2.html": {
@@ -638,6 +643,17 @@ window.PORTFOLIO_CONTENT = {
       "layout": {
         "order": "0"
       }
+    },
+    {
+      "type": "copy",
+      "id": "portfolio-dc72f733-a686-4f70-8311-687702bec8d4",
+      "page": "index.html",
+      "anchor": "[\"hero-specialization\",1,1,1]",
+      "position": "after",
+      "html": "\u003cspan class=\"expertise-chip expertise-chip--fintech\">FinTech\u003c/span>",
+      "layout": {
+        "order": "0"
+      }
     }
   ],
   "tokens": {},
@@ -997,6 +1013,12 @@ window.PORTFOLIO_CONTENT = {
           "[\"work-focus\",3]": {
             "style": {
               "border-radius": "0px"
+            }
+          },
+          "[\"portfolio-dc72f733-a686-4f70-8311-687702bec8d4\"]": {
+            "style": {
+              "border-radius": "8px",
+              "translate": "0px -10px"
             }
           }
         },

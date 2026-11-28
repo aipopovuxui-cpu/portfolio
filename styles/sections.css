@@ -398,7 +398,9 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
   content: "";
   width: var(--hero-focus-swatch);
   height: var(--hero-focus-swatch);
+  flex: none;
   background: var(--focus-color);
+  mask: url("../assets/img/loader/brand-mark.svg") center / contain no-repeat;
 }
 .hero.is-sequenced .hero__focus {
   grid-area: 1 / 1;
