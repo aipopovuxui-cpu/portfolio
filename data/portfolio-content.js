@@ -1055,14 +1055,18 @@ window.PORTFOLIO_CONTENT = {
               "background": "assets/uploads/6de8ef07c5daef9b816dabef5676acfbeadcc2840d8d412ab63861b528a2e56b.png"
             }
           },
-          "[\"portfolio-60c9fa2c-6fa0-49b2-ac9e-1173589d65de\"]": {
-            "style": {
-              "translate": "0px -60px"
-            }
-          },
           "[\"portfolio-9e477498-a0ef-4908-bd96-8e07ee905638\"]": {
             "style": {
-              "border-radius": "20px"
+              "border-radius": "20px",
+              "height": "auto",
+              "max-height": "none",
+              "aspect-ratio": "880 / 620",
+              "width": "795px",
+              "max-width": "100%",
+              "object-fit": "contain"
+            },
+            "attrs": {
+              "src": "assets/uploads/a5db8e25028a7e319c43e7bc2713fa135d4c60479b658e6030638ba63483883f.png"
             }
           },
           "[\"\",3,0,1,0]": {
