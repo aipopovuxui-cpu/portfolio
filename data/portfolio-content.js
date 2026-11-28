@@ -307,6 +307,25 @@ window.PORTFOLIO_CONTENT = {
       },
       "[\"\",3,0,0,1,2,4,1]": {
         "removed": true
+      },
+      "[\"portfolio-130d419a-fb40-4ab6-a8ad-85588c09e083\"]": {
+        "style": {
+          "font-family": "Onest",
+          "font-size": "20px",
+          "font-weight": "400"
+        },
+        "removed": true
+      },
+      "[\"portfolio-418411ef-eb7e-4905-a468-ab6baa9b1b51\"]": {
+        "removed": true
+      },
+      "[\"\",3,0,1,2]": {
+        "removed": true
+      },
+      "[\"portfolio-bc75ea72-80b1-4803-af4d-4bc480e2282c\"]": {
+        "text": {
+          "0": "Содержимое — можно назначить ссылку кнопке или тексту и удалить выбранный элемент. Удалённый элемент можно восстановить из списка.\n- Медиа — можно заменить изображение или видео для выбранной версии сайта.\n- Отменить — возвращает до 10 последних действий за сеанс. Работает и Ctrl+Z.\nНа мобильном первый экран теперь статичный, с первым кадром и без звуковой волны. Остальные разделы доступны обычной прокруткой."
+        }
       }
     },
     "case-3.html": {
@@ -654,6 +673,23 @@ window.PORTFOLIO_CONTENT = {
       "layout": {
         "order": "0"
       }
+    },
+    {
+      "id": "portfolio-130d419a-fb40-4ab6-a8ad-85588c09e083",
+      "page": "eis-sob.html",
+      "type": "text",
+      "anchor": "[\"\",3,0,1]",
+      "position": "end",
+      "text": "Сделать сложный инструмент отчётности для СБ простым, масштабируемым и удобным в ежедневной работе"
+    },
+    {
+      "id": "portfolio-418411ef-eb7e-4905-a468-ab6baa9b1b51",
+      "page": "eis-sob.html",
+      "type": "img",
+      "anchor": "[\"\",3,0,1]",
+      "position": "end",
+      "src": "assets/uploads/60a96eb38f8dcbf329ce7d09fb0d78203c6f3ab29cdb9cceb90464b2c66639aa.png",
+      "alt": ""
     }
   ],
   "tokens": {},
@@ -1033,6 +1069,11 @@ window.PORTFOLIO_CONTENT = {
               "line-height": "1.2",
               "font-family": "Onest"
             }
+          },
+          "[\"portfolio-130d419a-fb40-4ab6-a8ad-85588c09e083\"]": {
+            "style": {
+              "font-size": "18px"
+            }
           }
         },
         "case-5.html": {
@@ -1058,11 +1099,6 @@ window.PORTFOLIO_CONTENT = {
           "[\"portfolio-9e477498-a0ef-4908-bd96-8e07ee905638\"]": {
             "style": {
               "border-radius": "20px",
-              "height": "auto",
-              "max-height": "none",
-              "aspect-ratio": "880 / 620",
-              "width": "795px",
-              "max-width": "100%",
               "object-fit": "contain"
             },
             "attrs": {

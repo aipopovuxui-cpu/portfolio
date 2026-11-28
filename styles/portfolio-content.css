@@ -42,6 +42,10 @@
   inline-size: 100%;
   border-radius: var(--skills-card-radius);
 }
+.portfolio-lottie { display: block; inline-size: 100%; aspect-ratio: var(--case-photo-ratio, 16 / 9); }
+.case-story > .portfolio-added:is(img, video) { inline-size: 100%; block-size: auto; }
+.case-story img.portfolio-added { display: block; max-inline-size: 100%; max-block-size: none; aspect-ratio: auto; }
+.case-story > p.portfolio-added { white-space: pre-wrap; }
 
 .portfolio-case-details {
   display: grid;

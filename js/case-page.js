@@ -1,5 +1,6 @@
 import { expertiseTyping } from './motion.js?v=18';
 import { initDotCursor } from './cursor.js';
+import { playPortfolioLottie } from './portfolio-lottie.js';
 
 const menu = document.getElementById('site-menu');
 const menuToggle = document.querySelector('[aria-controls="site-menu"]');
@@ -9,6 +10,7 @@ const rotationDistance = parseFloat(getComputedStyle(document.documentElement).g
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const motionOn = !reducedMotion.matches && !new URLSearchParams(location.search).has('static');
 if (motionOn) initDotCursor();
+playPortfolioLottie();
 
 const caseTitle = document.getElementById('case-title');
 if (caseTitle) {

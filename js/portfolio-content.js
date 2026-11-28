@@ -3,7 +3,7 @@
   const script = document.currentScript;
   const pages = ['index.html', 'eis-sob.html', 'case-2.html', 'case-3.html', 'case-4.html', 'case-5.html'];
   const allowedStyles = new Set([
-    'font-family', 'font-size', 'font-weight', 'line-height', 'letter-spacing', 'text-align',
+    'font-family', 'font-size', 'font-weight', 'line-height', 'letter-spacing', 'text-align', 'font-style', 'text-decoration-line',
     'color', 'background-color', 'border-color', 'border-width', 'border-style', 'border-radius',
     'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
     'margin-top', 'margin-right', 'margin-bottom', 'margin-left', 'gap', 'width', 'max-width',
@@ -127,6 +127,16 @@
       case 'video':
         element = media(doc, type, src, alt);
         break;
+      case 'lottie': {
+        if (!url(src)) return null;
+        element = create(doc, 'figure', 'portfolio-animation');
+        const canvas = create(doc, 'canvas', 'portfolio-lottie');
+        canvas.dataset.lottieSrc = url(src);
+        canvas.setAttribute('role', 'img');
+        canvas.setAttribute('aria-label', alt || 'Анимация Lottie');
+        element.append(canvas);
+        break;
+      }
       case 'heading':
         element = create(doc, 'h3', '', text);
         break;
