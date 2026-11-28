@@ -47,6 +47,7 @@
   --experience-muted: #666669;
   --experience-inset-start: 3.2vw;
   --section-inset-end: 3%;
+  --section-right-column: 48.5vw;
   --experience-inset-end: var(--section-inset-end);
   --experience-preview-size: 180px;
   --experience-preview-edge: 16px;
@@ -425,12 +426,14 @@
   --showcase-return-card-top: 179px;
   --showcase-spin: 32s;
   --design-values-ink: #2a2a2a;
-  --design-values-top: 95px;
-  --design-values-bottom: 49px;
-  --design-values-compact-padding: 14px;
-  --design-values-title-share: 51.36%;
-  --design-values-gap: 54px;
-  --design-values-text-gap: 20px;
+  --design-values-padding: clamp(96px, 9vw, 160px);
+  --design-values-bottom-trim: 100px;
+  --design-values-column-gap: clamp(48px, 7vw, 128px);
+  --design-values-row-padding: clamp(24px, 2.35vw, 40px);
+  --design-values-text-width: 65ch;
+  --design-values-title-width: 14ch;
+  --design-values-mark: clamp(64px, 6.25vw, 104px);
+  --design-values-rule-width: 1px;
   --design-values-name-type: 400 clamp(24px, 2.25vw, 32px)/1.1875 var(--font-hero-side);
   --design-values-description-type: 400 18px/24px var(--font-hero-side);
   --case-header-offset: 85px;

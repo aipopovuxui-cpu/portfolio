@@ -740,25 +740,54 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
 /* Что для меня важно */
 .design-values {
   display: grid;
-  grid-template-columns: var(--design-values-title-share) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   align-items: start;
-  padding-block: var(--design-values-top) var(--design-values-bottom);
+  column-gap: var(--design-values-column-gap);
+  padding-block: var(--design-values-padding) max(var(--space-16), calc(var(--design-values-padding) - var(--design-values-bottom-trim)));
   padding-inline: var(--hero-design-inset) var(--section-inset-end);
   background: var(--color-bg-page);
   color: var(--design-values-ink);
 }
-.design-values__title, .design-values__description { text-wrap: wrap; }
-.design-values__title { padding-inline-end: var(--space-24); }
-.design-values__list { display: grid; gap: var(--design-values-gap); }
-.design-values__name { margin-block-end: var(--design-values-text-gap); }
+.design-values__title {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-48);
+  max-inline-size: var(--design-values-title-width);
+  text-wrap: balance;
+}
+.design-values__title::after {
+  content: "";
+  inline-size: var(--design-values-mark);
+  aspect-ratio: 1;
+  background: var(--hero-pink);
+  mask: url("../assets/img/loader/brand-mark.svg") center / contain no-repeat;
+}
+.has-motion .design-values__title::after {
+  animation: loader-mark-turn var(--hero-stat-mark-period) linear infinite;
+}
+.design-values__list { display: grid; border-block-end: var(--design-values-rule-width) solid var(--color-line); }
+.design-values__list li {
+  display: grid;
+  gap: var(--space-16);
+  padding-block: var(--design-values-row-padding);
+  border-block-start: var(--design-values-rule-width) solid var(--color-line);
+}
+.design-values__description { max-inline-size: var(--design-values-text-width); text-wrap: pretty; }
 @media (max-width: 768px) {
   .design-values {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-32);
-    padding-block: var(--design-values-compact-padding) 0;
+    padding-block: var(--space-64) var(--space-16);
   }
-  .design-values__list { gap: var(--space-32); }
-  .design-values__name { margin-block-end: var(--space-12); }
+  .design-values__title {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: var(--space-16);
+    max-inline-size: none;
+    text-wrap: wrap;
+  }
+  .design-values__title::after { inline-size: var(--space-40); }
+  .design-values__list li { gap: var(--space-12); }
 }
 
 /* Ключевые клиенты и рекомендации */
@@ -1269,6 +1298,9 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
   align-self: start;
   aspect-ratio: var(--showcase-media-ratio);
   overflow: clip;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   mask: url("../assets/img/projects/showcase-mask.svg") center / 100% 100% no-repeat;
 }
 .showcase__media img { position: absolute; inset: 0 auto auto 0; inline-size: 100%; }
@@ -1276,6 +1308,20 @@ html:not(.is-scroll-hover-locked) .hero__stats div.hero__stat--outlined:is(:hove
 .showcase__media--lilac { background: var(--showcase-lilac); }
 .showcase__media--lime { background: var(--showcase-lime); }
 .showcase__media--gray { background: var(--showcase-gray); }
+@media (min-width: 1001px) {
+  .design-values, .proof {
+    padding-inline-start: var(--showcase-inset);
+  }
+  .design-values {
+    grid-template-columns: minmax(0, calc(var(--section-right-column) - var(--showcase-inset) - var(--design-values-column-gap))) minmax(0, 1fr);
+  }
+  .proof {
+    grid-template-columns: minmax(0, calc(var(--section-right-column) - var(--showcase-inset) - var(--proof-columns-gap))) minmax(0, 1fr);
+  }
+  .showcase__card {
+    grid-template-columns: minmax(0, calc(var(--section-right-column) - var(--showcase-inset) - var(--showcase-padding) - var(--showcase-card-gap))) minmax(0, 1fr);
+  }
+}
 @media (max-width: 1000px) {
   .showcase { --showcase-heading-top: var(--space-64); }
   .showcase__card { grid-template-columns: minmax(0, 1fr); min-block-size: 0; padding: var(--space-24); }
