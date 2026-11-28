@@ -948,6 +948,56 @@ window.PORTFOLIO_CONTENT = {
             "style": {
               "translate": "0px -30px"
             }
+          },
+          "[\"work-focus\",1,1,1]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",1,1,2]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",1,1,3]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",1,1,4]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",2,1,1]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",2,1,2]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",2,1,3]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"work-focus\",2,1,4]": {
+            "style": {
+              "border-radius": "8px"
+            }
+          },
+          "[\"focus-design\"]": {
+            "style": {
+              "border-radius": "2px"
+            }
+          },
+          "[\"work-focus\",3]": {
+            "style": {
+              "border-radius": "0px"
+            }
           }
         },
         "eis-sob.html": {
