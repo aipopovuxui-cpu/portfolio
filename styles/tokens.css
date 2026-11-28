@@ -454,6 +454,8 @@
   --case-muted: #a4a4a4;
   --case-back-ink: #979797;
   --case-title-type: 600 24px/28px var(--font-hero-side);
+  --case-picker-border-width: 1px;
+  --case-picker-option-type: 500 20px/24px var(--font-hero-side);
   --case-back-type: 400 16px/20px var(--font-hero-side);
   --case-facts-type: 400 14px/20px var(--font-hero-side);
   --case-caption-type: 400 16px/20px var(--font-hero-side);

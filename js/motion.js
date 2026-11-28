@@ -34,7 +34,7 @@ const brandScroll = el => {
   update();
 };
 
-const expertiseTyping = (el, scrub = false) => {
+export const expertiseTyping = (el, scrub = false) => {
   if (!window.CSS?.highlights || !window.Highlight) return () => {};
   const name = 'expertise-untyped';
   let highlight = CSS.highlights.get(name);

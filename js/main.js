@@ -1,7 +1,7 @@
 /* Запуск. Режимы: ?static – без анимаций, всё видно (для скриншотов); &to=<id> – показать секцию (headless не рисует прокрутку,
    поэтому страница сдвигается отрицательным margin); prefers-reduced-motion – как static, но Lenis тоже выключен.
    Движение – js/motion.js (описание приёмов в docs/motion.md), 3D – js/scene.js лениво (docs/scene.md). */
-import { initMotion, initStatCount, initIntroTyping, initRecommendations } from './motion.js?v=14';
+import { initMotion, initStatCount, initIntroTyping, initRecommendations } from './motion.js?v=17';
 import { initDotCursor } from './cursor.js';
 
 const params = new URLSearchParams(location.search);
@@ -19,6 +19,7 @@ const patentPopup = document.querySelector('#patent-popup');
 const projectsCard = document.querySelector('.hero__stat--projects');
 const projectsPopup = document.querySelector('#projects-popup');
 const showPatent = () => {
+  if (cardHoverLocked || window.scrollY > 0) return;
   const card = patentCard.getBoundingClientRect();
   const screen = patentPopup.getBoundingClientRect();
   patentPopup.style.setProperty('--patent-card-x', `${card.left - screen.left}px`);
@@ -26,7 +27,7 @@ const showPatent = () => {
   patentPopup.classList.add('is-visible');
 };
 const hidePatent = () => patentPopup.classList.remove('is-visible');
-patentCard.addEventListener('pointerenter', () => { if (!cardHoverLocked) showPatent(); });
+patentCard.addEventListener('pointerenter', showPatent);
 patentCard.addEventListener('pointerleave', hidePatent);
 patentCard.addEventListener('focus', showPatent);
 patentCard.addEventListener('blur', hidePatent);
@@ -34,6 +35,7 @@ const openPatent = () => window.open('assets/img/hero/patent-document.png', '_bl
 patentCard.addEventListener('click', openPatent);
 patentCard.addEventListener('keydown', event => { if (event.key === 'Enter') openPatent(); });
 const showProjects = () => {
+  if (cardHoverLocked || window.scrollY > 0) return;
   const card = projectsCard.getBoundingClientRect();
   const screen = projectsPopup.getBoundingClientRect();
   projectsPopup.style.setProperty('--patent-card-x', `${card.left - screen.left}px`);
@@ -41,39 +43,42 @@ const showProjects = () => {
   projectsPopup.classList.add('is-visible');
 };
 const hideProjects = () => projectsPopup.classList.remove('is-visible');
-projectsCard.addEventListener('pointerenter', () => { if (!cardHoverLocked) showProjects(); });
+projectsCard.addEventListener('pointerenter', showProjects);
 projectsCard.addEventListener('pointerleave', hideProjects);
 projectsCard.addEventListener('focusin', showProjects);
 projectsCard.addEventListener('focusout', hideProjects);
 projectsCard.addEventListener('click', hideProjects);
-let cardHoverLocked = false;
-let scrollActive = false;
+let cardHoverLocked = window.scrollY > 0;
+document.documentElement.classList.toggle('is-scroll-hover-locked', cardHoverLocked);
 let scrollIdleTimer;
 let pointerX = NaN;
 let pointerY = NaN;
+const unlockCardHover = () => {
+  if (window.scrollY > 0) return;
+  cardHoverLocked = false;
+  document.documentElement.classList.remove('is-scroll-hover-locked');
+  const hovered = Number.isFinite(pointerX) ? document.elementFromPoint(pointerX, pointerY) : null;
+  if (patentCard.contains(hovered) || patentCard.matches(':focus-visible')) showPatent();
+  else if (projectsCard.contains(hovered) || projectsCard.querySelector(':focus-visible')) showProjects();
+};
 const lockCardHover = () => {
-  scrollActive = true;
   cardHoverLocked = true;
   document.documentElement.classList.add('is-scroll-hover-locked');
   hidePatent();
   hideProjects();
   clearTimeout(scrollIdleTimer);
-  scrollIdleTimer = setTimeout(() => { scrollActive = false; }, parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--card-hover-scroll-idle')));
+  scrollIdleTimer = setTimeout(unlockCardHover, parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--card-hover-scroll-idle')));
 };
 window.addEventListener('wheel', lockCardHover, { passive: true, capture: true });
 window.addEventListener('touchmove', lockCardHover, { passive: true });
 window.addEventListener('scroll', lockCardHover, { passive: true });
-document.addEventListener('pointermove', event => {
+const rememberCardPointer = event => {
   if (event.pointerType !== 'mouse') return;
-  const pointerMoved = Math.abs(event.clientX - pointerX) + Math.abs(event.clientY - pointerY) > 1;
   pointerX = event.clientX;
   pointerY = event.clientY;
-  if (!cardHoverLocked || scrollActive || !pointerMoved) return;
-  cardHoverLocked = false;
-  document.documentElement.classList.remove('is-scroll-hover-locked');
-  if (patentCard.contains(event.target)) showPatent();
-  else if (projectsCard.contains(event.target)) showProjects();
-}, { passive: true });
+};
+document.addEventListener('pointermove', rememberCardPointer, { passive: true });
+document.addEventListener('pointerleave', () => { pointerX = pointerY = NaN; });
 const lightHeaderSections = document.querySelectorAll('#expertise, #professional-experience, #tools, #section-4, #client-recommendations, #design-values, #section-5');
 const scrollProgress = document.querySelector('.scroll-progress');
 const updateScrollProgress = () => {
@@ -146,12 +151,18 @@ menu.addEventListener('click', event => {
   closeMenu();
 });
 menu.addEventListener('close', () => menuToggle.setAttribute('aria-expanded', 'false'));
+const scrollToProjectsIntro = () => {
+  document.getElementById('projects-intro').scrollIntoView({ block: 'start' });
+};
+projectsCard.querySelector('a[aria-describedby="projects-popup"]')?.addEventListener('click', event => {
+  if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  scrollToProjectsIntro();
+});
 menu.querySelectorAll('a').forEach(link => link.addEventListener('click', event => {
   if (link.hash === '#projects-intro') {
     event.preventDefault();
-    menu.addEventListener('close', () => {
-      document.getElementById('projects-intro').scrollIntoView({ block: 'start' });
-    }, { once: true });
+    menu.addEventListener('close', scrollToProjectsIntro, { once: true });
   }
   closeMenu();
 }));
